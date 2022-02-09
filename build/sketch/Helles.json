@@ -1,0 +1,290 @@
+#line 1 "c:\\Arduino\\git\\BrewDevice\\Helles.json"
+{
+    "Anhang": [
+    ],
+    "Bewertungen": [
+    ],
+    "Etiketten": [
+        {
+            "AbstandHor": 0,
+            "AbstandVert": 0,
+            "Anzahl": 20,
+            "Ausrichtung": 0,
+            "Breite": 185,
+            "Hoehe": 20,
+            "Papiergroesse": 0,
+            "Pfad": "C:/Users/pn010.TEAM/AppData/Roaming/kleiner-brauhelfer/data/Etiketten/streifen_simpel_farbig.svg",
+            "RandLinks": 5,
+            "RandOben": 10,
+            "RandRechts": 5,
+            "RandUnten": 15
+        }
+    ],
+    "Global": {
+        "db_Version": 2005
+    },
+    "Hauptgaerverlauf": [
+        {
+            "Alc": 0,
+            "Bemerkung": "",
+            "Restextrakt": 12.200000000000001,
+            "Temp": 16,
+            "Zeitstempel": "2020-11-20T21:14:58.000"
+        },
+        {
+            "Alc": 2.8580755253170493,
+            "Bemerkung": "",
+            "Restextrakt": 7,
+            "Temp": 15,
+            "Zeitstempel": "2020-11-21T04:42:30.000"
+        },
+        {
+            "Alc": 4.198074097424519,
+            "Bemerkung": "",
+            "Restextrakt": 4.5,
+            "Temp": 10,
+            "Zeitstempel": "2020-11-22T08:42:11.000"
+        },
+        {
+            "Alc": 4.622313019307842,
+            "Bemerkung": "",
+            "Restextrakt": 3.7,
+            "Temp": 10,
+            "Zeitstempel": "2020-11-23T06:46:49.000"
+        },
+        {
+            "Alc": 4.886351552556201,
+            "Bemerkung": "",
+            "Restextrakt": 3.2,
+            "Temp": 13,
+            "Zeitstempel": "2020-11-24T05:09:07.000"
+        }
+    ],
+    "Hefegaben": [
+        {
+            "Menge": 6,
+            "Name": "Fermentis Saflager W34/70",
+            "ZugabeNach": 0,
+            "Zugegeben": 1
+        }
+    ],
+    "Hopfengaben": [
+        {
+            "Alpha": 5.8,
+            "Name": "Hallertauer Tradition 5,8%",
+            "Pellets": 1,
+            "Prozent": 48.161764705882355,
+            "Vorderwuerze": 0,
+            "Zeit": 65,
+            "erg_Menge": 42.160644069441524
+        },
+        {
+            "Alpha": 5.8,
+            "Name": "Hallertauer Tradition 5,8%",
+            "Pellets": 1,
+            "Prozent": 31.25,
+            "Vorderwuerze": 0,
+            "Zeit": 15,
+            "erg_Menge": 27.35614309849259
+        },
+        {
+            "Alpha": 5.8,
+            "Name": "Hallertauer Tradition 5,8%",
+            "Pellets": 1,
+            "Prozent": 20.588235294117645,
+            "Vorderwuerze": 0,
+            "Zeit": -15,
+            "erg_Menge": 18.022870747242177
+        }
+    ],
+    "Malzschuettung": [
+        {
+            "Farbe": 22,
+            "Name": "Münchner Malz II",
+            "Potential": 0,
+            "Prozent": 89.7,
+            "erg_Menge": 7.643104971243351,
+            "pH": 5.37
+        },
+        {
+            "Farbe": 120,
+            "Name": "Caramünch",
+            "Potential": 0,
+            "Prozent": 9.500000000000002,
+            "erg_Menge": 0.8094704261628968,
+            "pH": 4.69
+        },
+        {
+            "Farbe": 1150,
+            "Name": "CaraFa Spezial",
+            "Potential": 0,
+            "Prozent": 0.8,
+            "erg_Menge": 0.06816593062424393,
+            "pH": 4.65
+        }
+    ],
+    "Nachgaerverlauf": [
+    ],
+    "Rasten": [
+        {
+            "Dauer": 5,
+            "Mengenfaktor": 1,
+            "Name": "Einmaischen",
+            "Param1": 42.34757670319025,
+            "Param2": 0,
+            "Param3": 18,
+            "Param4": 0,
+            "Temp": 40,
+            "Typ": 0
+        },
+        {
+            "Dauer": 5,
+            "Mengenfaktor": 1,
+            "Name": "Eiweissrast (57°)",
+            "Param1": "",
+            "Param2": "",
+            "Param3": "",
+            "Param4": "",
+            "Temp": 50,
+            "Typ": 1
+        },
+        {
+            "Dauer": 20,
+            "Mengenfaktor": 1,
+            "Name": "Maltoserast (60°-65°)",
+            "Param1": 0,
+            "Param2": 0,
+            "Param3": 0,
+            "Param4": 0,
+            "Temp": 62,
+            "Typ": 1
+        },
+        {
+            "Dauer": 30,
+            "Mengenfaktor": 1,
+            "Name": "Verzuckerung (70°-75°)",
+            "Param1": 0,
+            "Param2": 0,
+            "Param3": 0,
+            "Param4": 0,
+            "Temp": 72,
+            "Typ": 1
+        },
+        {
+            "Dauer": 1,
+            "Mengenfaktor": 1,
+            "Name": "Abmaischen (78°)",
+            "Param1": 0,
+            "Param2": 0,
+            "Param3": 0,
+            "Param4": 0,
+            "Temp": 78,
+            "Typ": 1
+        }
+    ],
+    "Schnellgaerverlauf": [
+        {
+            "Alc": 0,
+            "Bemerkung": "",
+            "Restextrakt": 12.200000000000001,
+            "Temp": 18,
+            "Zeitstempel": "2020-11-20T21:14:58.000"
+        },
+        {
+            "Alc": 2.8580755253170493,
+            "Bemerkung": "",
+            "Restextrakt": 7,
+            "Temp": 18,
+            "Zeitstempel": "2020-11-21T04:45:19.000"
+        },
+        {
+            "Alc": 4.622313019307842,
+            "Bemerkung": "",
+            "Restextrakt": 3.7,
+            "Temp": 18,
+            "Zeitstempel": "2020-11-22T07:42:59.000"
+        },
+        {
+            "Alc": 4.991728734174083,
+            "Bemerkung": "",
+            "Restextrakt": 3,
+            "Temp": 18,
+            "Zeitstempel": "2020-11-23T06:47:15.000"
+        },
+        {
+            "Alc": 4.991728734174083,
+            "Bemerkung": "",
+            "Restextrakt": 3,
+            "Temp": 18,
+            "Zeitstempel": "2020-11-24T05:09:37.000"
+        }
+    ],
+    "Sud": {
+        "Abfuelldatum": "2020-11-20T21:14:58.000",
+        "Anlage": "Braukessel 68l",
+        "AusbeuteIgnorieren": 0,
+        "Braudatum": "2020-11-20T21:14:58.000",
+        "CO2": 5,
+        "Erstellt": "2020-11-15T11:48:03.000",
+        "FaktorHauptguss": 3.8,
+        "Gespeichert": "2020-12-14T06:54:35.000",
+        "IBU": 20,
+        "JungbiermengeAbfuellen": 46.7,
+        "Kategorie": "UG",
+        "Kochdauer": 80,
+        "Kommentar": "####\n\nNachguss: von 19,7 l wurden 5l im Läuterbottich vorgelegt\nAusgangsmenge 44-45l für eff 2 NC Kegs je 16,5l\nAromahopfen 22gr statt 18gr\n\nHefe: 0,5l frische Erntehefe von Helles 11.2020\nAngestellt bei 15°C\nAbsenkung auf 8°C\nAuf 10°C kommen lassen (leichter Schwefelgeruch)\nBei 65% sEVG auf 14°C kommen lassen (Kühlung ausgeschaltet)\n\n\nCaraFa auf Stufe 2 gemahlen\n\nGärverlauf: Empfehlung von Ulrich, Weihenstephan\nAnstellen bei 8°C \nnach Ankommen der Hefe langsam (+0,5°C pro Tag) bis 10°C \nBei 10°C bis mind. 50% sEVG vergären, \nauf 14°C kommen lassen und endvergären\nNach Ende der Gärung noch 24h Diacetylrast bei 16°-17°C\nDanach 48h Coldcrash.\n\nMaximale Menge Nachguss ca. 18 Liter!!! \nMinimale Menge Nachguss ca. 6 Liter!\n",
+        "KostenWasserStrom": 0,
+        "Menge": 44,
+        "MerklistenID": 1,
+        "Nachisomerisierungszeit": 15,
+        "Reifezeit": 2,
+        "RestalkalitaetSoll": 2.14,
+        "SW": 12.200000000000001,
+        "SWAnstellen": 12.200000000000001,
+        "SWJungbier": 3.2,
+        "SWKochbeginn": 12.200000000000001,
+        "SWKochende": 12.200000000000001,
+        "SWSchnellgaerprobe": 3,
+        "SchnellgaerprobeAktiv": 1,
+        "Speisemenge": 0,
+        "Spunden": 0,
+        "Status": 1,
+        "Sudhausausbeute": 66.1,
+        "Sudname": "Dunkles 11.2020",
+        "Sudnummer": 0,
+        "TemperaturJungbier": 13,
+        "Verdampfungsrate": 6.5,
+        "Vergaerungsgrad": 76,
+        "VerschneidungAbfuellen": 1,
+        "Wasserprofil": "Baumener Wasser",
+        "WuerzemengeAnstellen": 46.7,
+        "WuerzemengeKochbeginn": 45,
+        "WuerzemengeKochende": 39,
+        "WuerzemengeVorHopfenseihen": 45,
+        "berechnungsArtHopfen": 0,
+        "erg_AbgefuellteBiermenge": 47.7,
+        "erg_Alkohol": 5.189433464561634,
+        "erg_EffektiveAusbeute": 70.15613636363636,
+        "erg_Farbe": 51.20748000000001,
+        "erg_Preis": 0.5119428268931053,
+        "erg_S_Gesamt": 8.520741328030491,
+        "erg_Sudhausausbeute": 67.60227272727272,
+        "erg_WHauptguss": 32.37881704651586,
+        "erg_WNachguss": 19.667761295060075,
+        "erg_W_Gesamt": 60.846578341575935,
+        "highGravityFaktor": 25
+    },
+    "Tags": [
+    ],
+    "Wasseraufbereitung": [
+        {
+            "Einheit": 5,
+            "Faktor": -0.2779,
+            "Menge": 0.13803170806166656,
+            "Name": "Calciumchlorid (CaCl2) (33%)",
+            "Restalkalitaet": -0.49669560295669873
+        }
+    ],
+    "WeitereZutatenGaben": [
+    ]
+}

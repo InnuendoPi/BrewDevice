@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>BrewDevice</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="styles.min.css"> -->
+</head>
+
+<body onload="setInterval(refresh, 3000)">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+                    <div class="container"><a class="navbar-brand" href="/index.html">BrewDevice</a><button
+                            class="navbar-toggler" data-toggle="collapse"><span class="sr-only">Toggle
+                                navigation</span><span class="navbar-toggler-icon"></span></button>
+                        <a href="/rezept.html" class="btn btn-outline-link">Rezept</a>
+                        <a href="/edit" class="btn btn-outline-link" id="btn-edit">Dateiexplorer</a>
+                        <button type="button" class="btn btn-outline-link" id="btn-reboot">Neustart</button>
+                        <button class="btn btn-outline-link" data-toggle="modal" data-target="#modal-system"
+                            type="button">System</button>
+                    </div>
+                </nav>
+                <div class="container-fluid" style="margin-top: 5px; margin-right: 0px;margin-left: 0px;padding: 0px;">
+                    <div class="row row-cols-4 justify-content-center align-items-top">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <h4
+                                                style="text-align: center;background: rgb(231,74,59);color: rgb(0,0,0);width: 100%;min-width: auto;min-height: auto;height: 100%;">
+                                                Maische-Sud</h4>
+                                        </div>
+                                        <div class="col-auto"><button class="btn btn-outline-danger text-center"
+                                                type="button" data-toggle="modal" data-target="#modal-maischesud"
+                                                style="padding-right: 15px;padding-top: 0px;padding-left: 15px;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-pencil"
+                                                    style="color: #1f2021;border-style: none;">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4">
+                                                    </path>
+                                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                                                </svg></button></div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon icon-tabler icon-tabler-temperature"
+                                        style="width: 15%;height: 15%;">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M10 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5"></path>
+                                        <line x1="10" y1="9" x2="14" y2="9"></line>
+                                    </svg><input type="text" readonly="" name="Txt-MaischeSud-Temp"
+                                        id="Txt-MaischeSud-Temp" value="0°C"
+                                        style="border-style: none; width: 85%;height: 100%;"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon icon-tabler icon-tabler-flame"
+                                        style="width: 15%;height: 15%;">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path
+                                            d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.762 4.383 -2.989 5.642c-1.226 1.26 -2.011 2.598 -2.011 4.358a6 6 0 1 0 12 0c0 -1.532 -.77 -2.94 -1.714 -4c-1.786 3 -3.077 3 -4.286 2z">
+                                        </path>
+                                    </svg><input type="text" id="Txt-MaischeSud-Power" name="Txt-MaischeSud-Power"
+                                        readonly="" value="0%" style="border-style: none; width: 85%;height: 100%;">
+                                    
+                                    <div class="border-top my-3"></div>
+                                    
+                                    <p style="width: 100%;"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                                            height="1em" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icon-tabler-temperature"
+                                            style="width: 15%;height: 15%;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M10 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5"></path>
+                                            <line x1="10" y1="9" x2="14" y2="9"></line>
+                                        </svg><input type="text"
+                                            style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                            id="Txt-MaischeSud-TempSoll" name="Txt-MaischeSud-TempSoll" value="0"><input
+                                            class="custom-range slider" type="range" name="Slider-MaischeSud-TempSoll"
+                                            id="Slider-MaischeSud-TempSoll" min="0" max="100" value="0" step="1"
+                                            style="width: 65%;height: 100%;border-style: solid;"></p>
+                                    <div class="slidecontainer"></div>
+                                    <p class="lead" style="width: 100%;"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="1em" height="1em" viewbox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round" class="icon icon-tabler icon-tabler-flame"
+                                            style="width: 15%;height: 15%;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path
+                                                d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.762 4.383 -2.989 5.642c-1.226 1.26 -2.011 2.598 -2.011 4.358a6 6 0 1 0 12 0c0 -1.532 -.77 -2.94 -1.714 -4c-1.786 3 -3.077 3 -4.286 2z">
+                                            </path>
+                                        </svg><input type="text"
+                                            style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                            id="Txt-MaischeSud-PowerSoll" name="Txt-MaischeSud-PowerSoll"
+                                            value="0"><input class="custom-range slider" type="range"
+                                            name="Slider-MaischeSud-PowerSoll" id="Slider-MaischeSud-PowerSoll" min="0"
+                                            max="100" value="0" step="1"
+                                            style="width: 65%;height: 100%;border-style: solid;"></p>
+                                    <div class="row row-cols-5 justify-content-center align-items-center no-gutters">
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <button class="btn btn-dark btn-lg" id="Btn-MaischeSud-Auto" type="button"
+                                                style="border-style: none;text-align: center;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-car">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <circle cx="7" cy="17" r="2"></circle>
+                                                    <circle cx="17" cy="17" r="2"></circle>
+                                                    <path
+                                                        d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <!-- Start: Power --><button class="btn btn-dark btn-lg"
+                                                id="Btn-MaischeSud-Power" type="button"
+                                                style="border-style: none;text-align: center;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-power">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M7 6a7.75 7.75 0 1 0 10 0"></path>
+                                                    <line x1="12" y1="4" x2="12" y2="12"></line>
+                                                </svg></button><!-- End: Power -->
+                                        </div>
+                                        <!--
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <button class="btn btn-dark btn-lg"
+                                                id="Btn-MaischeSud-Agitator" type="button"
+                                                style="border-style: none;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-repeat">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3"></path>
+                                                    <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3-3l3-3"></path>
+                                                </svg></button>
+                                        </div>
+                                    -->
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <button class="btn btn-dark btn-lg" id="Btn-MaischeSud-Timer" type="button"
+                                                style="border-style: none;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-clock">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <circle cx="12" cy="12" r="9"></circle>
+                                                    <polyline points="12 7 12 12 15 15"></polyline>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <h4
+                                                style="text-align: center;background: var(--blue);color: rgb(0,0,0);width: 100%;min-width: auto;min-height: auto;height: 100%;">
+                                                Nachguss</h4>
+                                        </div>
+                                        <div class="col-auto"><button class="btn btn-outline-primary text-center"
+                                                type="button" data-toggle="modal" data-target="#modal-nachguss"
+                                                style="padding-right: 15px;padding-top: 0px;padding-left: 15px;border-color: rgb(0,117,255);"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-pencil"
+                                                    style="color: #1f2021;border-style: none;">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4">
+                                                    </path>
+                                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                                                </svg></button></div>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon icon-tabler icon-tabler-temperature"
+                                        style="width: 15%;height: 15%;">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M10 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5"></path>
+                                        <line x1="10" y1="9" x2="14" y2="9"></line>
+                                    </svg><input type="text" value="0°C" id="Txt-Nachguss-Temp" name="Txt-Nachguss-Temp"
+                                        readonly="" style="border-style: none;width: 85%;"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon icon-tabler icon-tabler-flame"
+                                        style="width: 15%;height: 15%;">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path
+                                            d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.762 4.383 -2.989 5.642c-1.226 1.26 -2.011 2.598 -2.011 4.358a6 6 0 1 0 12 0c0 -1.532 -.77 -2.94 -1.714 -4c-1.786 3 -3.077 3 -4.286 2z">
+                                        </path>
+                                    </svg><input type="text" value="0%" id="Txt-Nachguss-Power"
+                                        name="Txt-Nachguss-Power" readonly="" style="border-style: none;width: 85%;">
+
+                                    <div class="border-top my-3"></div>
+
+                                    <p style="width: 100%;"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                                            height="1em" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icon-tabler-temperature"
+                                            style="width: 15%;height: 15%;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M10 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5"></path>
+                                            <line x1="10" y1="9" x2="14" y2="9"></line>
+                                        </svg><input type="text"
+                                            style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                            id="Txt-Nachguss-TempSoll" name="Txt-Nachguss-TempSoll" value="0"><input
+                                            class="custom-range slider" type="range" min="0" max="100" value="0"
+                                            step="1" id="Slider-Nachguss-TempSoll" name="Slider-Nachguss-TempSoll"
+                                            style="width: 65%;height: 100%;border-style: solid;"></p>
+                                    <p class="lead" style="width: 100%;"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="1em" height="1em" viewbox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round" class="icon icon-tabler icon-tabler-flame"
+                                            style="width: 15%;height: 15%;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path
+                                                d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.762 4.383 -2.989 5.642c-1.226 1.26 -2.011 2.598 -2.011 4.358a6 6 0 1 0 12 0c0 -1.532 -.77 -2.94 -1.714 -4c-1.786 3 -3.077 3 -4.286 2z">
+                                            </path>
+                                        </svg><input type="text"
+                                            style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                            id="Txt-Nachguss-PowerSoll" name="Txt-Nachguss-PowerSoll" value="0"><input
+                                            class="custom-range slider" type="range" min="0" max="100" value="0"
+                                            step="1" id="Slider-Nachguss-PowerSoll" name="Slider-Nachguss-PowerSoll"
+                                            style="width: 65%;height: 100%;border-style: solid;"></p>
+                                    <div class="row row-cols-5 justify-content-center align-items-center no-gutters">
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <button class="btn btn-dark btn-lg" id="Btn-Nachguss-Auto" type="button"
+                                                style="border-style: none;text-align: center;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-car">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <circle cx="7" cy="17" r="2"></circle>
+                                                    <circle cx="17" cy="17" r="2"></circle>
+                                                    <path
+                                                        d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5">
+                                                    </path>
+                                                </svg></button>
+                                        </div>
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <button class="btn btn-dark btn-lg" id="Btn-Nachguss-Power" type="button"
+                                                style="border-style: none;text-align: center;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-power">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M7 6a7.75 7.75 0 1 0 10 0"></path>
+                                                    <line x1="12" y1="4" x2="12" y2="12"></line>
+                                                </svg></button>
+                                        </div>
+                                        <div class="col-auto align-self-center" style="margin-right: 15px;width: 19%;">
+                                            <button class="btn btn-dark btn-lg" id="Btn-Nachguss-Timer" type="button"
+                                                style="border-style: none;text-align: center;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-clock">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <circle cx="12" cy="12" r="9"></circle>
+                                                    <polyline points="12 7 12 12 15 15"></polyline>
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <h4
+                                                style="text-align: center;background: var(--green);color: rgb(0,0,0);width: 100%;min-width: auto;min-height: auto;height: 100%;">
+                                                Misc</h4>
+                                        </div>
+                                        <div class="col-auto"><button class="btn btn-outline-success text-center"
+                                                type="button" data-toggle="modal" data-target="#modal-misc"
+                                                style="padding-right: 15px;padding-top: 0px;padding-left: 15px;border-color: rgb(28,200,138);"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-pencil"
+                                                    style="color: #1f2021;border-style: none;">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4">
+                                                    </path>
+                                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                                                </svg></button></div>
+                                    </div>
+
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-1 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em" 
+                                            height="1em" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round" 
+                                            class="icon icon-tabler icon-tabler-clipboard-list" 
+                                            style="margin-right: 5px;width: 70%;height: 70%;margin-bottom: 5px;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                                            <rect x="9" y="3" width="6" height="4" rx="2"></rect>
+                                            <line x1="9" y1="12" x2="9.01" y2="12"></line>
+                                            <line x1="13" y1="12" x2="15" y2="12"></line>
+                                            <line x1="9" y1="16" x2="9.01" y2="16"></line>
+                                            <line x1="13" y1="16" x2="15" y2="16"></line>
+                                        </svg></div>
+                                        <div class="col"><input type="text" value="Rezeptname" id="Txt-Misc-Rezeptname" name="Txt-Misc-Rezeptname"
+                                            readonly="" style="border-style: none;width: 85%;">
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-1 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                                                height="1em" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icon-tabler-clipboard-check"
+                                                style="margin-right: 5px;width: 70%;height: 70%;margin-bottom: 5px;">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path
+                                                    d="M9 5H7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2V7a2 2 0 0 0 -2 -2h-2">
+                                                </path>
+                                                <rect x="9" y="3" width="6" height="4" rx="2"></rect>
+                                                <path d="M9 14l2 2l4 -4"></path>
+                                            </svg></div>
+                                        <div class="col"><input type="text" value="" id="Txt-Misc-Step" readonly=""
+                                                style="border-style: none;width: 100%;margin-bottom: 5px;">
+                                        </div>
+                                        <div class="col"><input type="text" value="0min" id="Txt-Misc-Counter"
+                                                readonly="" style="border-style: none;width: 100%;margin-bottom: 5px;">
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-1 mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
+                                                height="1em" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icon-tabler-circles"
+                                                style="margin-right: 5px;width: 70%;height: 70%;margin-bottom: 5px;">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                                <circle cx="6.5" cy="17" r="4"></circle>
+                                                <circle cx="17.5" cy="17" r="4"></circle>
+                                            </svg></div>
+                                        <div class="col-auto"><input type="text" value="aktuell kein Reminder"
+                                                name="txt-misc-reminder" id="txt-misc-reminder" readonly=""
+                                                style="border-style: none;width: 85%;margin-bottom: 5px;"></div>
+                                    </div>
+                                    
+
+
+                                    <!-- <div class="row">
+                                        <div class="col">
+                                            
+                                            <div class="progress" id="Prog-Misc-Rast" style="margin-bottom: 5%;">
+                                                <div class="progress-bar bg-info progress-bar-striped"
+                                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 60%;">60%</div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row justify-content-center align-items-center no-gutters"
+                                        style="margin-bottom: 10px;">
+                                        <div class="col-auto" style="width: 25%;height: 100%;margin-right: 20px;">
+                                            <!-- Start: Reward --><button class="btn btn-warning btn-lg"
+                                                id="Btn-Misc-Rewind" type="button"
+                                                style="border-style: none;margin-right: 10px;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-player-skip-back">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M20 5v14l-12 -7z"></path>
+                                                    <line x1="4" y1="5" x2="4" y2="19"></line>
+                                                </svg></button><!-- End: Reward -->
+                                        </div>
+                                        <div class="col-auto" style="width: 25%;height: 100%;margin-right: 20px;">
+                                            <!-- Start: Pause --><button class="btn btn-warning btn-lg"
+                                                id="Btn-Misc-Pause" type="button"
+                                                style="border-style: none;margin-right: 10px;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-player-pause">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+                                                    <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+                                                </svg></button><!-- End: Pause -->
+                                        </div>
+                                        <div class="col-auto" style="width: 25%;height: 100%;">
+                                            <!-- Start: Forward --><button class="btn btn-warning btn-lg"
+                                                id="Btn-Misc-Forwind" type="button"
+                                                style="border-style: none;width: 100%;"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                    viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icon-tabler-player-skip-forward">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 5v14l12 -7z"></path>
+                                                    <line x1="20" y1="5" x2="20" y2="19"></line>
+                                                </svg></button><!-- End: Forward -->
+                                        </div>
+                                    </div>
+                                    <div class="border-top my-3"></div>
+                                    <!--line-->
+
+                                    <div class="row justify-content-center align-items-center no-gutters"
+                                        style="width: 100%;height: 100%;">
+                                        <div class="col">
+                                            <p style="text-align: left;width: 100%; height: 100%" ;><button
+                                                    class="btn btn-dark btn-lg text-nowrap" id="Btn-Misc-Agitator"
+                                                    type="button"
+                                                    style="border-style: none;margin-bottom: 5px;text-align: left;margin-right: 10px;"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                        viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                        fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="icon icon-tabler icon-tabler-refresh">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                                    </svg></button><input type="text"
+                                                    style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                                    name="Txt-Misc-AgitatorSoll" value="0"><input
+                                                    class="custom-range slider" type="range"
+                                                    id="Slider-Misc-AgitatorSoll" min="0" max="100" value="0" step="1"
+                                                    name="Silder-Misc-AgitatorSoll"
+                                                    style="width: 60%;height: 100%;border-style: solid;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center align-items-center no-gutters"
+                                        style="width: 100%;height: 100%;">
+                                        <div class="col">
+                                            <p style="text-align: left;width: 100%;"><button
+                                                    class="btn btn-dark btn-lg text-nowrap" id="Btn-Misc-Pump"
+                                                    type="button"
+                                                    style="border-style: none;margin-bottom: 5px;text-align: left;margin-right: 10px;"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                        viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                        fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="icon icon-tabler icon-tabler-route">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <circle cx="6" cy="19" r="2"></circle>
+                                                        <circle cx="18" cy="5" r="2"></circle>
+                                                        <path
+                                                            d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5">
+                                                        </path>
+                                                    </svg></button><input type="text"
+                                                    style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                                    name="Txt-Misc-PumpSoll" value="0"><input
+                                                    class="custom-range slider" type="range" id="Slider-Misc-PumpSoll"
+                                                    min="0" max="100" value="0" step="1" name="Silder-Misc-PumpSoll"
+                                                    style="width: 60%;height: 100%;border-style: solid;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center align-items-center no-gutters"
+                                        style="width: 100%;height: 100%;">
+                                        <div class="col">
+                                            <p style="width: 100%;"><button class="btn btn-dark btn-lg"
+                                                    id="Btn-Misc-RHE" type="button"
+                                                    style="border-style: none;margin-bottom: 5px;margin-right: 10px;">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                        viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                        fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="icon icon-tabler icon-tabler-float-center">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <rect width="6" height="6" x="9" y="5" rx="1"></rect>
+                                                        <line x1="4" y1="7" x2="5" y2="7"></line>
+                                                        <line x1="4" y1="11" x2="5" y2="11"></line>
+                                                        <line x1="19" y1="7" x2="20" y2="7"></line>
+                                                        <line x1="19" y1="11" x2="20" y2="11"></line>
+                                                        <line x1="4" y1="15" x2="20" y2="15"></line>
+                                                        <line x1="4" y1="19" x2="20" y2="19"></line>
+                                                    </svg>
+                                                </button><input type="text"
+                                                    style="width: 15%;height: 100%;margin-right: 10px;border: 1px solid rgb(90,92,105);border-radius: 5px;text-align: right; font-size: small;"
+                                                    name="Txt-Misc-RHESoll" value="0"><input class="custom-range slider"
+                                                    type="range" id="Slider-Misc-RHESoll" min="0" max="100" value="0"
+                                                    step="1" name="Slider-Misc-RHESoll"
+                                                    style="width: 60%;height: 100%;border-style: solid;"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-4 justify-content-center align-items-start">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6
+                                        class="text-primary flex-grow-0 flex-shrink-1 justify-content-start align-items-start align-content-start font-weight-bold m-0">
+                                        Maischeplan</h6>
+                                </div>
+                                <div class="card-body">
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" id="Li-Maische-Step1">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step1" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step1" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step1"><label
+                                                            class="custom-control-label" id="Check-Maische-No1"
+                                                            for="Check-Maische-Step1"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step2">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step2" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step2" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step2"><label
+                                                            class="custom-control-label" id="Check-Maische-No2"
+                                                            for="Check-Maische-Step2"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step3">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step3" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step3" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step3"><label
+                                                            class="custom-control-label" id="Check-Maische-No3"
+                                                            for="Check-Maische-Step3"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step4">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step4" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step4" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step4"><label
+                                                            class="custom-control-label" id="Check-Maische-No4"
+                                                            for="Check-Maische-Step4"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step5">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step5" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step5" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step5"><label
+                                                            class="custom-control-label" id="Check-Maische-No5"
+                                                            for="Check-Maische-Step5"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step6">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step6" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step6" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step6"><label
+                                                            class="custom-control-label" id="Check-Maische-No6"
+                                                            for="Check-Maische-Step6"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step7">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step7" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step7" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step7"><label
+                                                            class="custom-control-label" id="Check-Maische-No7"
+                                                            for="Check-Maische-Step7"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step8">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step8" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step8" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step8"><label
+                                                            class="custom-control-label" id="Check-Maische-No8"
+                                                            for="Check-Maische-Step8"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step9">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step9" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step9" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox"><input
+                                                            class="custom-control-input" type="checkbox" id="Check-Maische-Step9"><label
+                                                            class="custom-control-label" id="Check-Maische-No9"
+                                                            for="Check-Maische-Step9"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item" id="Li-Maische-Step10">
+                                            <div class="row align-items-center no-gutters">
+                                                <div class="col mr-2">
+                                                    <h6 id="Head-Maischeplan-Step10" class="small font-weight-bold"></h6>
+                                                    <span id="Span-Maischeplan-Step10" class="float-right"></span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="custom-control custom-checkbox" id="Check-Maische-Step10"><input
+                                                            class="custom-control-input" type="checkbox"><label
+                                                            class="custom-control-label" id="Check-Maische-No10"
+                                                            for="Check-Maische-Step10"></label></div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                   
+                                    <!-- Alter Version mit Progressbar
+                                    <h4 id="Head-Maischeplan-Step10" class="small font-weight-bold"><span
+                                            class="float-right" id="Span-Maischeplan-Step10"></span></h4>
+                                    
+                                    <div class="progress mb-4" id="Cl-Maischeplan-Step10">
+                                        <div class="progress-bar bg-success" id="Prog-Maischeplan-Step10"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                            <span class="sr-only">0%</span>
+                                        </div>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Hopfengabe und Zutaten</h6>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"  id="Li-ToDo-Step1">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step1" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step1" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step1"><input
+                                                        class="custom-control-input" type="checkbox" id="Check-Reminder-Step1"><label
+                                                        class="custom-control-label" id="Check-ToDo-No1"
+                                                        for="Check-Reminder-Step1"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item"  id="Li-ToDo-Step2">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step2" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step2" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step2"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Reminder-Step2"><label class="custom-control-label"
+                                                        id="Check-ToDo-No2" for="Check-Reminder-Step2"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-ToDo-Step3">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step3" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step3" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step3"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Reminder-Step3"><label class="custom-control-label"
+                                                        id="Check-ToDo-No3" for="Check-Reminder-Step3"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-ToDo-Step4">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step4" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step4" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step4"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Reminder-Step4"><label class="custom-control-label"
+                                                        id="Check-ToDo-No4" for="Check-Reminder-Step4"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-ToDo-Step5">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step5" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step5" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step5"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Reminder-Step5"><label class="custom-control-label"
+                                                        id="Check-ToDo-No5" for="Check-Reminder-Step5"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-ToDo-Step6">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step6" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step6" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step6"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Reminder-Step6"><label class="custom-control-label"
+                                                        id="Check-ToDo-No6" for="Check-Reminder-Step6"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-ToDo-Step7">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-ToDo-Step7" class="small font-weight-bold"></h6>
+                                                <span id="Txt-ToDo-Step7" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToDo-Step7"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Reminder-Step7"><label class="custom-control-label"
+                                                        id="Check-ToDo-No7" for="Check-Reminder-Step7"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary font-weight-bold m-0">Aufgaben und Reminder</h6>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="Li-Sonstiges-Step1">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step1" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step1" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-Sonstiges-Step1"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step1"><label class="custom-control-label" 
+                                                        id="Check-Sonst-No1" for="Check-Sonst-Step1"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-Sonstiges-Step2">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step2" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step2" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-Sonstiges-Step2"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step2"><label class="custom-control-label"
+                                                        id="Check-Sonst-No2" for="Check-Sonst-Step2"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-Sonstiges-Step3">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step3" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step3" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-Sonstiges-Step3"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step3"><label class="custom-control-label"
+                                                        id="Check-Sonst-No3" for="Check-Sonst-Step3"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-Sonstiges-Step4">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step4" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step4" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-ToSonstigesDo-Step4"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step4"><label class="custom-control-label"
+                                                        id="Check-Sonst-No4" for="Check-Sonst-Step4"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-Sonstiges-Step5">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step5" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step5" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-Sonstiges-Step5"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step5"><label class="custom-control-label"
+                                                        id="Check-Sonst-No5" for="Check-Sonst-Step5"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-Sonstiges-Step6">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step6" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step6" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-Sonstiges-Step6"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step6"><label class="custom-control-label"
+                                                        id="Check-Sonst-No6" for="Check-Sonst-Step6"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" id="Li-Sonstiges-Step7">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 id="Head-Sonstiges-Step7" class="small font-weight-bold"></h6>
+                                                <span id="Txt-Sonstiges-Step7" class="float-right"></span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="custom-control custom-checkbox" id="Check-Sonstiges-Step7"><input
+                                                        class="custom-control-input" type="checkbox"
+                                                        id="Check-Sonst-Step7"><label class="custom-control-label"
+                                                        id="Check-Sonst-No7" for="Check-Sonst-Step7"></label></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" id="modal-maischesud" tabindex="-1">
+        <div class="modal-dialog modal-lg" data-keyboard="true" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">MaischeSud Kessel bearbeiten</h5> <button type="button" class="close"
+                        data-dismiss="modal">
+                        <span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="modal-maischesud-sensor-address">Temperatur Sensor:</label>
+                                <select class="form-control" id="modal-maischesud-sensor-address"></select>
+                                <button class="btn btn-warning" type="button"
+                                    id="modal-maischesud-sensor-address-refresh"><svg xmlns="http://www.w3.org/2000/svg"
+                                        width="1em" height="1em" viewbox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icon-tabler-alert-triangle">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 9v2m0 4v.01"></path>
+                                        <path
+                                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75">
+                                        </path>
+                                    </svg></button>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-sensor-offset">Temperatur Sensor Offset</label>
+                                <input type="text" class="form-control" placeholder=""
+                                    id="modal-maischesud-sensor-offset" />
+                            </div>
+                            <div class="border-top my-3"></div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-maischesud-ids2" />
+                                <label class="form-check-label" for="modal-maischesud-ids2">Aktiviere
+                                    Induktionskochfeld IDS2
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-msname">Kesselname</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-maischesud-msname">
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-white">PIN Weiß (Relais)</label>
+                                <select class="form-control" id="modal-maischesud-ids2-white"></select>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-yellow">PIN Gelb (Command Channel)</label>
+                                <select class="form-control" id="modal-maischesud-ids2-yellow"></select>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-blue">PIN Blau (Backchannel)</label>
+                                <select class="form-control" id="modal-maischesud-ids2-blue"></select>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-delay">Lüfternachlauf bei Abschaltung
+                                    (Sek)</label>
+                                <input type="text" class="form-control" placeholder=""
+                                    id="modal-maischesud-ids2-delay" />
+                            </div>
+                            <!--
+                            <div class="border-top my-3"></div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-maischesud-heater" />
+                                <label class="form-check-label" for="modal-maischesud-heater">Aktiviere Heater per
+                                    GPIO (Yato, Hendi)</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-heater-gpio">Heater GPIO</label>
+                                <select class="form-control" id="modal-maischesud-heater-gpio"></select>
+                            </div>
+                            <div class="border-top my-3"></div>
+                            -->
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-kp">PID Kp</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-maischesud-ids2-kp" />
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-ki">PID Ki</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-maischesud-ids2-ki" />
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-maischesud-ids2-kd">PID Kd</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-maischesud-ids2-kd" />
+                            </div>
+                            <div class="border-top my-3"></div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="modal-maischesud-grafana" />
+                                <label class="form-check-label" for="modal-maischesud-grafana">Aktiviere
+                                    Grafana</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-outline-warning" id="modal-maischesud-pidauto"
+                        type="button">PID
+                        AutoTune Start</button><button class="btn btn-outline-danger" id="modal-maischesud-pidcancel"
+                        type="button">PID
+                        AutoTune Stop</button><button class="btn btn-outline-secondary" type="button"
+                        data-dismiss="modal">Schließen</button><button class="btn btn-outline-primary"
+                        id="modal-maischesud-btn-save" type="button">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" id="modal-nachguss" tabindex="-1">
+        <div class="modal-dialog modal-lg" data-keyboard="true" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nachguss bearbeiten</h5> <button type="button" class="close"
+                        data-dismiss="modal">
+                        <span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="modal-nachguss-sensor-address">Temperatur Sensor Adresse</label>
+                                <select class="form-control" id="modal-nachguss-sensor-address"></select>
+                                <button class="btn btn-warning" type="button"
+                                    id="modal-nachguss-sensor-address-refresh"><svg xmlns="http://www.w3.org/2000/svg"
+                                        width="1em" height="1em" viewbox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icon-tabler-alert-triangle">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 9v2m0 4v.01"></path>
+                                        <path
+                                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75">
+                                        </path>
+                                    </svg></button>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-nachguss-sensor-offset">Temperatur Sensor Offset</label>
+                                <input type="text" class="form-control" placeholder=""
+                                    id="modal-nachguss-sensor-offset" />
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-nachguss-ngname">Kesselname</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-nachguss-ngname">
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-nachguss-heater">Nachguss GPIO</label>
+                                <select class="form-control" id="modal-nachguss-heater"></select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-nachguss-invert" />
+                                <label class="form-check-label" for="modal-nachguss-invert">Invertiere GPIO</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-nachguss-kp">PID Kp</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-nachguss-kp" />
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-nachguss-ki">PID Ki</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-nachguss-ki" />
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-nachguss-kd">PID Kd</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-nachguss-kd" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-nachguss-grafana" />
+                                <label class="form-check-label" for="modal-nachguss-grafana">Aktiviere Grafana</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-outline-warning" id="modal-nachguss-pidauto"
+                        type="button">PID
+                        AutoTune Start</button><button class="btn btn-outline-danger" id="modal-nachguss-pidcancel"
+                        type="button">PID
+                        AutoTune Stop</button><button class="btn btn-outline-secondary" type="button"
+                        data-dismiss="modal">Schließen</button><button class="btn btn-outline-primary"
+                        id="modal-nachguss-btn-save" type="button">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" id="modal-misc" tabindex="-1">
+        <div class="modal-dialog modal-lg" data-keyboard="true" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Misc bearbeiten</h5> <button type="button" class="close"
+                        data-dismiss="modal">
+                        <span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="modal-misc-nameagi">Name Aktor Rührwerk</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-misc-nameagi">
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-misc-agitator">Wähle Rührwerk GPIO</label>
+                                <select class="form-control" id="modal-misc-agitator"></select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="modal-misc-invert-agitator" />
+                                <label class="form-check-label" for="modal-misc-invert-agitator">Invertiere GPIO
+                                    Rührwerk</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-misc-pwm-agitator" />
+                                <label class="form-check-label" for="modal-misc-pwm-agitator">Zeige PWM für GPIO
+                                    Rührwerk</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-misc-namepump">Name Aktor Pumpe</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-misc-namepump">
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-misc-pump">Pumpe GPIO</label>
+                                <select class="form-control" id="modal-misc-pump"></select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-misc-invert-pump" />
+                                <label class="form-check-label" for="modal-misc-invert-pump">Invertiere GPIO
+                                    Pumpe</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-misc-pwm-pump" />
+                                <label class="form-check-label" for="modal-misc-pwm-pump">Zeige PWM für GPIO
+                                    Pumpe</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-misc-namerhe">Name Aktor 3 Ringheizelement</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-misc-namerhe">
+                            </div>
+                            <div class="form-group row">
+                                <label for="modal-misc-rhe">Ringheizelement GPIO</label>
+                                <select class="form-control" id="modal-misc-rhe"></select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-misc-invert-rhe" />
+                                <label class="form-check-label" for="modal-misc-invert-rhe">Invertiere GPIO RHE</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-misc-pwm-rhe" />
+                                <label class="form-check-label" for="modal-misc-pwm-rhe">Zeige PWM für GPIO RHE</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-outline-secondary" type="button"
+                        data-dismiss="modal">Schließen</button><button class="btn btn-outline-primary" id="modal-misc-btn-save"
+                        type="button">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="modal-system" tabindex="-1">
+        <div class="modal-dialog modal-lg" data-keyboard="true" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Systemeinstellungen bearbeiten</h5> <button type="button" class="close"
+                        data-dismiss="modal">
+                        <span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="sysTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="sys1-tab" data-toggle="tab" href="#sys1" role="tab"
+                                aria-controls="sys1" aria-selected="true">System</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sys2-tab" data-toggle="tab" href="#sys2" role="tab"
+                                aria-controls="sys2" aria-selected="true">Intervalle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="sys3-tab" data-toggle="tab" href="#sys3" role="tab"
+                                aria-controls="sys3" aria-selected="true">Restore</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="sysTabContent">
+                        <div class="tab-pane fade show active" id="sys1" role="tabpanel" aria-labelledby="sys1-tab">
+                            <br />
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-sys-buzzer" />
+                                <label class="form-check-label" for="modal-sys-buzzer">Aktiviere Buzzer (GPIO D8)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-sys-mdns" />
+                                <label class="form-check-label" for="modal-sys-mdns">Aktiviere mDNS</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-mdns-name">Eindeutiger mDNS Name</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-mdns-name" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-sys-db-enable" />
+                                <label class="form-check-label" for="modal-sys-db-enable">Aktiviere Visualisierung
+                                    Grafana (Neustart erforderlich!)</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-db-server">Influx Datenbank Server IP</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-db-server" />
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-db-database">Datenbank Name (brewdevice)</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-db-database" />
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-db-user">Datenbank Benutzer</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-db-user" />
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-db-pass">Datenbank Benutzer Password</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-db-pass" />
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="sys2" role="tabpanel" aria-labelledby="sys2-tab">
+                            <br />
+                            <div class="form-group">
+                                <label for="modal-sys-upsen">Sensoren Update Intervall (Sek)</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-upsen" />
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-upact">Aktoren Update Intervall (Sek)</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-upact" />
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-upind">Induktionskochfeld Update Intervall (Sek)</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-upind" />
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-sys-updb">Grafana Update Intervall (Sek)</label>
+                                <input type="text" class="form-control" placeholder="" id="modal-sys-updb" />
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="sys3" role="tabpanel" aria-labelledby="sys3-tab">
+                            <br />
+                            <label class="form-check-label">Reset BrewDevice</label>
+                            <br />
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-sys-testmode" />
+                                <label class="form-check-label" for="modal-sys-testmode">Testmodus (nicht
+                                    aktivieren!)</label>
+                            </div>
+                            <div class="border-top my-3"></div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-sys-reset" />
+                                <label class="form-check-label" for="modal-sys-reset">Lösche WLAN Einstellungen (Reset
+                                    to AP Mode)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="modal-sys-clear" />
+                                <label class="form-check-label" for="modal-sys-clear">Lösche alle Einstellungen (Reset
+                                    to defaults)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-outline-secondary" type="button"
+                        data-dismiss="modal">Schließen</button><button class="btn btn-outline-primary" id="modal-sys-btn-save"
+                        type="button">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./jquery.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        function refresh() {
+            upMaischePlan();
+            upHopfen();
+            upSonstiges();
+            upWeb();
+        }
+
+        function msrefresh() {
+            var modal = $('#modal-maischesud')
+            $.get("/reqMS", function (data) {
+                if (data.ids2autotune == 0) {
+                    modal.find('#modal-maischesud-ids2-kp').val(data.ids2kp);
+                    modal.find('#modal-maischesud-ids2-ki').val(data.ids2ki);
+                    modal.find('#modal-maischesud-ids2-kd').val(data.ids2kd);
+                }
+            });
+        }
+
+        function ngrefresh() {
+            var modal = $('#modal-nachguss')
+            $.get("/reqNG", function (data) {
+                if (data.ngautotune == 0) {
+                    modal.find('#modal-nachguss-kp').val(data.ngkp);
+                    modal.find('#modal-nachguss-ki').val(data.ngki);
+                    modal.find('#modal-nachguss-kd').val(data.ngkd);
+                }
+            });
+        }
+
+        // MaischeSud Buttons
+        $("#Btn-MaischeSud-Auto").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            // $("#Btn-MaischeSud-Power").prop('disabled', status);
+
+            // Starte Timer
+            // timer.start({ countdown: true, startValues: { seconds: 30 } });
+            $.ajax({
+                url: '/Btn-MaischeSud-Auto?msstateAuto=' + status + '&msdisabledPower=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-MaischeSud-Power").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-MaischeSud-Power?msstatePower=' + status + '&msdisabledAuto=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-MaischeSud-Timer").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-danger');
+            var status = false;
+            if ($(this).is('.btn-danger')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-MaischeSud-Timer?msstateTimer=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        // Nachguss Buttons
+        $("#Btn-Nachguss-Auto").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Nachguss-Auto?ngstateAuto=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-Nachguss-Power").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Nachguss-Power?ngstatePower=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-Nachguss-Timer").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-danger');
+            var status = false;
+            if ($(this).is('.btn-danger')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Nachguss-Timer?ngstateTimer=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        // Misc Buttons
+        $("#Btn-Misc-Agitator").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Misc-Agitator?mistateAgitator=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-Misc-Pump").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Misc-Pump?mistatePump=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-Misc-RHE").click(function () {
+            $(this).toggleClass('btn-dark').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Misc-RHE?mistateRHE=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+
+        $("#Btn-Misc-Rewind").click(function () {
+            
+            // $(this).toggleClass('btn-warning').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Misc-Rewind',
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-Misc-Pause").click(function () {
+            $(this).toggleClass('btn-warning').toggleClass('btn-danger');
+            var status = false;
+            if ($(this).is('.btn-danger')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Misc-Pause?mistatePause=' + status,
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+        $("#Btn-Misc-Forwind").click(function () {
+            // $(this).toggleClass('btn-warning').toggleClass('btn-success');
+            var status = false;
+            if ($(this).is('.btn-success')) {
+                status = true;
+            }
+            $.ajax({
+                url: '/Btn-Misc-Forwind',
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+        });
+
+        // MaischeSud Text und Slider 
+        $('#Slider-MaischeSud-TempSoll').change(function () {
+            $.ajax({
+                url: '/Slider-MaischeSud-TempSoll?sliderTemp=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Txt-MaischeSud-TempSoll').val($(this).val());
+        });
+        $('#Txt-MaischeSud-TempSoll').change(function () {
+            $.ajax({
+                url: '/Slider-MaischeSud-TempSoll?sliderTemp=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Slider-MaischeSud-TempSoll').val($(this).val());
+        });
+        $('#Slider-MaischeSud-PowerSoll').change(function () {
+            $.ajax({
+                url: '/Slider-MaischeSud-PowerSoll?sliderPower=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Txt-MaischeSud-PowerSoll').val($(this).val());
+        });
+        $('#Txt-MaischeSud-PowerSoll').change(function () {
+            $.ajax({
+                url: '/Slider-MaischeSud-PowerSoll?sliderPower=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Slider-MaischeSud-PowerSoll').val($(this).val());
+        });
+        // Nachguss Text und Slider
+        $('#Slider-Nachguss-TempSoll').change(function () {
+            $.ajax({
+                url: '/Slider-Nachguss-TempSoll?sliderTemp=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Txt-Nachguss-TempSoll').val($(this).val());
+        });
+        $('#Txt-Nachguss-TempSoll').change(function () {
+            $.ajax({
+                url: '/Slider-Nachguss-TempSoll?sliderTemp=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Slider-Nachguss-TempSoll').val($(this).val());
+        });
+        $('#Slider-Nachguss-PowerSoll').change(function () {
+            $.ajax({
+                url: '/Slider-Nachguss-PowerSoll?sliderPower=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Txt-Nachguss-PowerSoll').val($(this).val());
+        });
+        $('#Txt-Nachguss-PowerSoll').change(function () {
+            $.ajax({
+                url: '/Slider-Nachguss-PowerSoll?sliderPower=' + $(this).val(),
+                type: 'POST',
+                async: true,
+                cache: false
+            });
+            $('#Slider-Nachguss-PowerSoll').val($(this).val());
+        });
+
+        // Reminder Checkboxen
+        $('#Check-Reminder-Step1').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+        $('#Check-Reminder-Step2').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+        $('#Check-Reminder-Step3').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+        $('#Check-Reminder-Step4').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+        $('#Check-Reminder-Step5').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+        $('#Check-Reminder-Step6').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+        $('#Check-Reminder-Step7').click(function () {
+            $(this).checked = !$(this).checked;
+        });
+
+        // Button Reboot
+        $("#btn-reboot").click(function () {
+            $.ajax({
+                url: '/reboot',
+                type: 'POST',
+                async: false,
+                cache: false
+            });
+        });
+
+        $("#modal-maischesud-sensor-address-refresh").click(function () {
+            $('#modal-sensor-address').load('/reqSearchSensorAdresses?id=0')
+        });
+
+        $("#modal-nachguss-sensor-address-refresh").click(function () {
+            $('#modal-sensor-address').load('/reqSearchSensorAdresses?id=0')
+        });
+
+        $('#modal-maischesud').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            onload = setInterval(msrefresh, 60000);
+
+            var modal = $(this);
+            $('#modal-maischesud-sensor-address').load('/reqSearchSensorAdresses?id=0');
+            $('#modal-maischesud-ids2-white').load('/reqMSInd?req=pins&id=0');
+            $('#modal-maischesud-ids2-yellow').load('/reqMSInd?req=pins&id=1');
+            $('#modal-maischesud-ids2-blue').load('/reqMSInd?req=pins&id=2');
+            $.get("/reqMS", function (data) {
+                modal.find('#modal-maischesud-sensor-offset').val(data.sensoroffset);
+                modal.find('#modal-maischesud-msname').val(data.msName);
+                modal.find('#modal-maischesud-ids2').prop("checked", Boolean(Number(data.ids2)));
+                modal.find('#modal-maischesud-ids2-delay').val(data.ids2delay);
+                modal.find('#modal-maischesud-ids2-kp').val(data.ids2kp);
+                modal.find('#modal-maischesud-ids2-ki').val(data.ids2ki);
+                modal.find('#modal-maischesud-ids2-kd').val(data.ids2kd);
+                modal.find('#modal-maschiesud-grafana').prop("checked", Boolean(Number(data.grafana)));
+            });
+        });
+
+        $("#modal-maischesud-btn-save").click(function () {
+            var modal = $('#modal-maischesud')
+            var sensorid = '0';
+            var sensoraddress = modal.find('#modal-maischesud-sensor-address').val();
+            var sensoroffset = modal.find('#modal-maischesud-sensor-offset').val();
+            var msname = modal.find('#modal-maischesud-msname').val();
+            var ids2 = modal.find('#modal-maischesud-ids2').prop("checked");
+            var ids2delay = modal.find('#modal-maischesud-ids2-delay').val();
+            var ids2white = modal.find('#modal-maischesud-ids2-white').val();
+            var ids2yellow = modal.find('#modal-maischesud-ids2-yellow').val();
+            var ids2blue = modal.find('#modal-maischesud-ids2-blue').val();
+            var grafana = modal.find('#modal-maischesud-grafana').prop("checked");
+            var ids2kp = modal.find('#modal-maischesud-ids2-kp').val();
+            var ids2ki = modal.find('#modal-maischesud-ids2-ki').val();
+            var ids2kd = modal.find('#modal-maischesud-ids2-kd').val();
+
+            $.ajax({
+                // ?&sensoraddress='
+                url: '/setMS?sensoraddress=' + sensoraddress + '&sensoroffset=' + sensoroffset + '&msName=' + msname + '&ids2=' + ids2 + '&ids2white=' + ids2white + '&ids2yellow=' + ids2yellow + '&ids2blue=' + ids2blue + '&ids2delay=' + ids2delay + '&ids2kp=' + ids2kp + '&ids2ki=' + ids2ki + '&ids2kd=' + ids2kd + '&grafana=' + grafana,
+                type: 'POST',
+                dataType: 'html',
+                async: false,
+                cache: false
+            });
+
+            modal.modal('hide')
+        });
+        $("#modal-maischesud-pidauto").click(function () {
+            var modal = $('#modal-maischesud')
+            modal.find('#modal-maischesud-ids2-kp').val('AutoTune MaischeSud gestartet');
+            modal.find('#modal-maischesud-ids2-ki').val("Dauer ca. 30-60min");
+            modal.find('#modal-maischesud-ids2-kd').val(">> Fenster nicht schließen <<");
+            $.ajax({
+                url: '/msAutoTune',
+                type: 'POST',
+                async: false,
+                cache: false
+            });
+        });
+        $("#modal-maischesud-pidcancel").click(function () {
+            $.ajax({
+                url: '/msCancelAutoTune',
+                type: 'POST',
+                async: false,
+                cache: false
+            });
+        });
+
+        $('#modal-nachguss').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            onload = setInterval(ngrefresh, 60000);
+            var modal = $('#modal-nachguss')
+            $('#modal-nachguss-sensor-address').load('/reqSearchSensorAdresses?id=1');
+            $('#modal-nachguss-heater').load('/reqPins?id=1');
+            $.get("/reqNG", function (data) {
+                modal.find('#modal-nachguss-sensor-offset').val(data.sensoroffset);
+                modal.find('#modal-nachguss-ngname').val(data.ngName);
+                modal.find('#modal-nachguss-heater').val(data.heater);
+                modal.find('#modal-nachguss-invert').prop("checked", Boolean(Number(data.inverted)));
+                modal.find('#modal-nachguss-grafana').prop("checked", Boolean(Number(data.grafana)));
+                modal.find('#modal-nachguss-kp').val(data.ngkp);
+                modal.find('#modal-nachguss-ki').val(data.ngki);
+                modal.find('#modal-nachguss-kd').val(data.ngkd);
+            });
+        });
+
+        $("#modal-nachguss-btn-save").click(function () {
+            var modal = $('#modal-nachguss')
+            // var sensorid = button.data('value')
+            var sensorid = '1';
+            var sensoraddress = modal.find('#modal-nachguss-sensor-address').val();
+            var sensoroffset = modal.find('#modal-nachguss-sensor-offset').val();
+            var ngname = modal.find('#modal-nachguss-ngname').val();
+            var heater = modal.find('#modal-nachguss-heater').val();
+            var inverted = modal.find('#modal-nachguss-invert').prop("checked");
+            var grafana = modal.find('#modal-nachguss-grafana').prop("checked");
+            var kp = modal.find('#modal-nachguss-kp').val();
+            var ki = modal.find('#modal-nachguss-ki').val();
+            var kd = modal.find('#modal-nachguss-kd').val();
+
+            $.ajax({
+                url: '/setNG?&sensoraddress=' + sensoraddress + '&sensoroffset=' + sensoroffset +'&ngName=' + ngname + '&heater=' + heater + '&inverted=' + inverted + '&kp=' + kp + '&ki=' + ki + '&kd=' + kd + '&grafana=' + grafana,
+                type: 'POST',
+                dataType: 'html',
+                async: false,
+                cache: false
+            });
+            modal.modal('hide')
+        });
+        $("#modal-nachguss-pidauto").click(function () {
+            var modal = $('#modal-nachguss')
+            modal.find('#modal-nachguss-kp').val('AutoTune Nachguss gestartet');
+            modal.find('#modal-nachguss-ki').val("Dauer ca. 30-60min");
+            modal.find('#modal-nachguss-kd').val(">> Fenster nicht schließen <<");
+            $.ajax({
+                url: '/ngAutoTune',
+                type: 'POST',
+                async: false,
+                cache: false
+            });
+        });
+        $("#modal-nachguss-pidcancel").click(function () {
+            $.ajax({
+                url: '/ngCancelAutoTune',
+                type: 'POST',
+                async: false,
+                cache: false
+            });
+        });
+
+        $('#modal-misc').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $('#modal-misc');
+            $('#modal-misc-agitator').load('/reqPins?id=0');
+            $('#modal-misc-pump').load('/reqPins?id=3');
+            $('#modal-misc-rhe').load('/reqPins?id=4');
+            $.get("/reqMI", function (data) {
+                modal.find('#modal-misc-nameagi').val(data.miNameAgi);
+                modal.find('#modal-misc-namepump').val(data.miNamePump);
+                modal.find('#modal-misc-namerhe').val(data.miNameRHE);
+                modal.find('#modal-misc-agitator').val(data.agitator);
+                modal.find('#modal-misc-pump').val(data.pump);
+                modal.find('#modal-misc-rhe').val(data.rhe);
+                modal.find('#modal-misc-invert-agitator').prop("checked", Boolean(Number(data.agitator_inverted)));
+                modal.find('#modal-misc-invert-pump').prop("checked", Boolean(Number(data.pump_inverted)));
+                modal.find('#modal-misc-invert-rhe').prop("checked", Boolean(Number(data.rhe_inverted)));
+                modal.find('#modal-misc-pwm-agitator').prop("checked", Boolean(Number(data.agitator_pwm)));
+                modal.find('#modal-misc-pwm-pump').prop("checked", Boolean(Number(data.pump_pwm)));
+                modal.find('#modal-misc-pwm-rhe').prop("checked", Boolean(Number(data.rhe_pwm)));
+            });
+        });
+
+        $("#modal-misc-btn-save").click(function () {
+            var modal = $('#modal-misc')
+            // var buzzer = modal.find('#modal-misc-buzzer').val();
+            var nameagi = modal.find('#modal-misc-nameagi').val();
+            var namepump = modal.find('#modal-misc-namepump').val();
+            var namerhe = modal.find('#modal-misc-namerhe').val();
+            var agitator = modal.find('#modal-misc-agitator').val();
+            var pump = modal.find('#modal-misc-pump').val();
+            var rhe = modal.find('#modal-misc-rhe').val();
+            var agitator_inverted = modal.find('#modal-misc-invert-agitator').prop("checked");
+            var pump_inverted = modal.find('#modal-misc-invert-pump').prop("checked");
+            var rhe_inverted = modal.find('#modal-misc-invert-rhe').prop("checked");
+            var agitator_pwm = modal.find('#modal-misc-pwm-agitator').prop("checked");
+            var pump_pwm = modal.find('#modal-misc-pwm-pump').prop("checked");
+            var rhe_pwm = modal.find('#modal-misc-pwm-rhe').prop("checked");
+
+            $.ajax({
+                url: '/setMI?&miNameAgi=' + nameagi +'&miNamePump=' + namepump +'&miNameRHE=' + namerhe + '&agitator=' + agitator + '&pump=' + pump + '&rhe=' + rhe + '&agitator_inverted=' + agitator_inverted + '&pump_inverted=' + pump_inverted + '&rhe_inverted=' + rhe_inverted + '&agitator_pwm=' + agitator_pwm + '&pump_pwm=' + pump_pwm + '&rhe_pwm=' + rhe_pwm,
+                type: 'POST',
+                dataType: 'html',
+                async: false,
+                cache: false
+            });
+            modal.modal('hide')
+        });
+
+        $('#modal-system').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var modal = $('#modal-system');
+            $.get("/reqSys", function (data) {
+                modal.find('#modal-sys-mdns').prop("checked", Boolean(Number(data.mdns)));
+                modal.find('#modal-sys-buzzer').prop("checked", Boolean(Number(data.buzzer)));
+                modal.find('#modal-sys-testmode').prop("checked", Boolean(Number(data.testmode)));
+                modal.find('#modal-sys-mdns-name').val(data.mdnsname);
+                modal.find('#modal-sys-db-enable').val(data.startdb);
+                modal.find('#modal-sys-db-server').val(data.dbserver);
+                modal.find('#modal-sys-db-database').val(data.dbdatabase);
+                modal.find('#modal-sys-db-user').val(data.dbuser);
+                modal.find('#modal-sys-db-pass').val(data.dbpass);
+                modal.find('#modal-sys-upsen').val(data.upsen);
+                modal.find('#modal-sys-upact').val(data.upact);
+                modal.find('#modal-sys-upind').val(data.upind);
+                modal.find('#modal-sys-updb').val(data.updb);
+            });
+        });
+
+        $("#modal-sys-btn-save").click(function () {
+            var modal = $('#modal-system');
+
+            // Sys
+            var buzzer = modal.find('#modal-sys-buzzer').prop('checked');
+            var mdns = modal.find('#modal-sys-mdns').prop('checked');
+            var mdns_name = modal.find('#modal-sys-mdns-name').val();
+            var startdb = modal.find('#modal-sys-db-enable').prop("checked");
+            var dbserver = modal.find('#modal-sys-db-server').val();
+            var dbdatabase = modal.find('#modal-sys-db-database').val();
+            var dbuser = modal.find('#modal-sys-db-user').val();
+            var dbpass = modal.find('#modal-sys-db-pass').val();
+            // Intervalle
+            var upsen = modal.find('#modal-sys-upsen').val();
+            var upact = modal.find('#modal-sys-upact').val();
+            var upind = modal.find('#modal-sys-upind').val();
+            var updb = modal.find('#modal-sys-updb').val();
+            // Restore
+            var reset = modal.find('#modal-sys-reset').prop("checked");
+            var clear = modal.find('#modal-sys-clear').prop("checked");
+            var testmode = modal.find('#modal-sys-testmode').prop("checked");
+
+            $.ajax({
+                url: '/setSys?mdns=' + mdns + '&mdns_name=' + mdns_name + '&buzzer=' + buzzer + '&startdb=' + startdb + '&dbserver=' + dbserver + '&dbdatabase=' + dbdatabase + '&dbuser=' + dbuser + '&dbpass=' + dbpass + '&upsen' + upsen + '&upact=' + upact + '&upind=' + upind + '&updb=' + updb + '&testmode=' + testmode + '&reset=' + reset + '&clear=' + clear,
+                type: 'POST',
+                dataType: 'html',
+                async: false,
+                cache: false
+            });
+            modal.modal('hide')
+        });
+
+        function upWeb() {
+            $.get("/reqWeb", function (data) {
+                $('#Txt-MaischeSud-Temp').val(data.mstempIst + "°C");
+                $('#Txt-MaischeSud-Power').val(data.mspowerIst + "%");
+                $('#Txt-MaischeSud-TempSoll ').val(data.mstempSoll + "°C");
+                $('#Slider-MaischeSud-TempSoll').val(data.mstempSoll);
+                $('#Txt-MaischeSud-PowerSoll').val(data.mspowerSoll + "%");
+                $('#Slider-MaischeSud-PowerSoll').val(data.mspowerSoll);
+                $('#Txt-Nachguss-Temp').val(data.ngtempIst + "°C");
+                $('#Txt-Nachguss-Power').val(data.ngpowerIst + "%");
+                $('#Txt-Nachguss-TempSoll').val(data.ngtempSoll + "°C");
+                $('#Slider-Nachguss-TempSoll').val(data.ngtempSoll);
+                $('#Txt-Nachguss-PowerSoll').val(data.ngpowerSoll + "%");
+                $('#Slider-Nachguss-PowerSoll').val(data.ngpowerSoll);
+                $('#Txt-Misc-Counter').val(data.maischeCounter + "min");
+                $('#Txt-Misc-Step').val(data.maischeName);
+                $('#Txt-Misc-Rezeptname').val(data.rezeptname);
+                // $('#Txt-Misc-Reminder').val(data.reminder);
+                if (((data.msstateAuto) && ($('#Btn-MaischeSud-Auto').is('.btn-dark'))) || ((!data.msstateAuto) && ($('#Btn-MaischeSud-Auto').is('.btn-success')))) {
+                    $('#Btn-MaischeSud-Auto').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.msstatePower) && ($('#Btn-MaischeSud-Power').is('.btn-dark'))) || ((!data.msstatePower) && ($('#Btn-MaischeSud-Power').is('.btn-success')))) {
+                    $('#Btn-MaischeSud-Power').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.msstateTimer) && ($('#Btn-MaischeSud-Timer').is('.btn-dark'))) || ((!data.msstateTimer) && ($('#Btn-MaischeSud-Timer').is('.btn-danger')))) {
+                    $('#Btn-MaischeSud-Timer').toggleClass('btn-dark').toggleClass('btn-danger');
+                }
+                if (data.msdisabledAuto != $('#Btn-MaischeSud-Auto').prop('disabled')) {
+                    $('#Btn-MaischeSud-Auto').prop('disabled', data.msdisabledAuto);
+                }
+                if (data.msdisabledAuto != $('#Btn-MaischeSud-Auto').prop('disabled')) {
+                    $('#Btn-MaischeSud-Auto').prop('disabled', data.msdisabledAuto);
+                }
+                if (data.msdisabledPower != $('#Btn-MaischeSud-Power').prop('disabled')) {
+                    $('#Btn-MaischeSud-Power').prop('disabled', data.msdisabledPower);
+                }
+
+                if (((data.ngstateAuto) && ($('#Btn-Nachguss-Auto').is('.btn-dark'))) || ((!data.ngstateAuto) && ($('#Btn-Nachguss-Auto').is('.btn-success')))) {
+                    $('#Btn-Nachguss-Auto').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.ngstatePower) && ($('#Btn-Nachguss-Power').is('.btn-dark'))) || ((!data.ngstatePower) && ($('#Btn-Nachguss-Power').is('.btn-success')))) {
+                    $('#Btn-Nachguss-Power').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.ngstateTimer) && ($('#Btn-Nachguss-Timer').is('.btn-dark'))) || ((!data.ngstateTimer) && ($('#Btn-Nachguss-Timer').is('.btn-danger')))) {
+                    $('#Btn-Nachguss-Timer').toggleClass('btn-dark').toggleClass('btn-danger');
+                }
+
+                if (((data.mistateAgitator) && ($('#Btn-Nachguss-Agitator').is('.btn-dark'))) || ((!data.mistateAgitator) && ($('#Btn-Nachguss-Agitator').is('.btn-success')))) {
+                    $('#Btn-Nachguss-Agitator').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.mistatePump) && ($('#Btn-Misc-Pump').is('.btn-dark'))) || ((!data.mistatePump) && ($('#Btn-Misc-Pump').is('.btn-success')))) {
+                    $('#Btn-Misc-Pump').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.mistateRHE) && ($('#Btn-Misc-RHE').is('.btn-dark'))) || ((!data.mistateRHE) && ($('#Btn-Misc-RHE').is('.btn-success')))) {
+                    $('#Btn-Misc-RHE').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.mistateRew) && ($('#Btn-Misc-Rew').is('.btn-dark'))) || ((!data.mistateRew) && ($('#Btn-Misc-Rew').is('.btn-success')))) {
+                    $('#Btn-Misc-Rew').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.mistatePause) && ($('#Btn-Misc-Pause').is('.btn-dark'))) || ((!data.mistatePause) && ($('#Btn-Misc-Pause').is('.btn-success')))) {
+                    $('#Btn-Misc-Pause').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+                if (((data.mistateFor) && ($('#Btn-Misc-For').is('.btn-dark'))) || ((!data.mistateFor) && ($('#Btn-Misc-For').is('.btn-success')))) {
+                    $('#Btn-Misc-For').toggleClass('btn-dark').toggleClass('btn-success');
+                }
+            });
+        }
+        function upMaischePlan() {
+            $.get("/reqMaische", function (data) {
+                var anzahl = 0;
+                $.each(data, function (i, element) {
+                    if (i == 0) {
+                        $("#Head-Maischeplan-Step1").html(element.Rasten  + ', '  + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step1").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step1").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 1) {
+                        $("#Head-Maischeplan-Step2").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step2").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step2").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 2) {
+                        $("#Head-Maischeplan-Step3").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step3").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step3").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 3) {
+                        $("#Head-Maischeplan-Step4").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step4").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step4").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 4) {
+                        $("#Head-Maischeplan-Step5").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step5").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step5").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 5) {
+                        $("#Head-Maischeplan-Step6").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step6").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step6").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 6) {
+                        $("#Head-Maischeplan-Step7").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step7").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step7").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 7) {
+                        $("#Head-Maischeplan-Step8").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step8").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step8").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 8) {
+                        $("#Head-Maischeplan-Step9").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step9").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step9").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+                    }
+                    if (i == 9) {
+                        $("#Head-Maischeplan-Step10").html(element.Rasten + ', ' + element.Temperatur +'°C' + '<span class="float-right">' + element.Dauer + 'min</span>');
+                        // $("#Prog-Maischeplan-Step10").html(element.Elapsed + '%');
+                        // $("#Prog-Maischeplan-Step10").attr('aria-valuenow', element.Elapsed + '%').css('width', element.Elapsed + '%');
+
+                    }
+                    anzahl++;
+                });
+                // console.log("Anzahl Elemente: "+anzahl+"\n");
+                // $(selector).css('visibility', 'hidden'); // Hide element
+                // $(selector).css('visibility', 'visible'); // Show element
+                for (j = anzahl + 1; j < 11; j++) {
+                    var selector = "#Li-Maische-Step" + j;
+                    $(selector).css('visibility', 'hidden');
+                    // selector = "#Cl-Maischeplan-Step" + j;
+                    // $(selector).css('visibility', 'hidden');
+                }
+            });
+        }
+
+        function upHopfen() {
+            $.get("/reqHopfen", function (data) {
+                var anzahl = 0;
+                $.each(data, function (i, element) {
+                    if (i == 0) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step1").html(element.Hopfen + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step1").html(element.Hopfen  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    if (i == 1) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step2").html(element.Hopfen + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step2").html(element.Hopfen  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    if (i == 2) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step3").html(element.Hopfen + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step3").html(element.Hopfen  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    if (i == 3) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step4").html(element.Name + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step4").html(element.Name  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    if (i == 4) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step5").html(element.Name + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step5").html(element.Name  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    if (i == 5) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step6").html(element.Name + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step6").html(element.Name  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    if (i == 6) {
+                        if (element.Kochdauer > 0)
+                        {
+                            $("#Head-ToDo-Step7").html(element.Name + ', ' + element.Menge + 'gr' + '<span class="float-right">' + element.Kochdauer + 'min</span>');
+                        }
+                        else
+                        {
+                            $("#Head-ToDo-Step7").html(element.Name  + ', ' + element.Menge + 'gr' + '<span class="float-right">WP ' + element.Kochdauer + 'min</span>');
+                        }
+                    }
+                    anzahl++;
+                });
+                // $(selector).css('visibility', 'hidden'); // Hide element
+                // $(selector).css('visibility', 'visible'); // Show element
+                for (j = anzahl + 1; j < 8; j++) {
+                    var selector = "#Li-ToDo-Step" + j;
+                    $(selector).css('visibility', 'hidden');
+                }
+            });
+        }
+
+        function upSonstiges() {
+            $.get("/reqSonstiges", function (data) {
+                var anzahl = 0;
+                $.each(data, function (i, element) {
+                    if (i == 0) {
+                        $("#Head-Sonstiges-Step1").html(element.Aufgabe +  '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    if (i == 1) {
+                        $("#Head-Sonstiges-Step2").html(element.Aufgabe + '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    if (i == 2) {
+                        $("#Head-Sonstiges-Step3").html(element.Aufgabe + '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    if (i == 3) {
+                        $("#Head-Sonstiges-Step4").html(element.Aufgabe + '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    if (i == 4) {
+                        $("#Head-Sonstiges-Step5").html(element.Aufgabe + '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    if (i == 5) {
+                        $("#Head-Sonstiges-Step6").html(element.Aufgabe + '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    if (i == 6) {
+                        $("#Head-Sonstiges-Step7").html(element.Aufgabe + '<span class="float-right">' + element.Rast + ' - ' + element.Option + ' - ' + element.Zeitpunkt + '</span>');
+                    }
+                    anzahl++;
+                });
+                // $(selector).css('visibility', 'hidden'); // Hide element
+                // $(selector).css('visibility', 'visible'); // Show element
+                for (j = anzahl + 1; j < 8; j++) {
+                    // console.log("Anzahl Elemente Sonstiges: "+j+"\n");
+                    var selector = "#Li-Sonstiges-Step" + j;
+                    $(selector).css('visibility', 'hidden');
+                    $(selector).css('disabled');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

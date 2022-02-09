@@ -1,0 +1,181 @@
+{
+    "Global": {
+        "db_Version": 2005
+    },
+    "Hauptgaerverlauf": [
+        {
+            "Alc": 1.2122268113601149e-15,
+            "Bemerkung": "",
+            "Restextrakt": 12.2,
+            "Temp": 9.7,
+            "Zeitstempel": "2021-01-20T16:00:28.000"
+        }
+    ],
+    "Hopfengaben": [
+        {
+            "Alpha": 5.8,
+            "Name": "Hallertauer Tradition 5,8%",
+            "Pellets": 1,
+            "Prozent": 45.772758851487424,
+            "Vorderwuerze": 0,
+            "Zeit": 65,
+            "erg_Menge": 52.926321009742914
+        },
+        {
+            "Alpha": 5.8,
+            "Name": "Hallertauer Tradition 5,8%",
+            "Pellets": 1,
+            "Prozent": 29.699881697530007,
+            "Vorderwuerze": 0,
+            "Zeit": 15,
+            "erg_Menge": 34.34150599868815
+        },
+        {
+            "Alpha": 5.8,
+            "Name": "Hallertauer Tradition 5,8%",
+            "Pellets": 1,
+            "Prozent": 24.527359450982573,
+            "Vorderwuerze": 0,
+            "Zeit": -15,
+            "erg_Menge": 28.36059989383557
+        }
+    ],
+    "Malzschuettung": [
+        {
+            "Farbe": 22,
+            "Name": "Münchner Malz II",
+            "Potential": 0,
+            "Prozent": 89.7,
+            "erg_Menge": 9.553881214054188,
+            "pH": 5.37
+        },
+        {
+            "Farbe": 120,
+            "Name": "Caramünch",
+            "Potential": 0,
+            "Prozent": 9.500000000000002,
+            "erg_Menge": 1.011838032703621,
+            "pH": 4.69
+        },
+        {
+            "Farbe": 1150,
+            "Name": "CaraFa Spezial",
+            "Potential": 0,
+            "Prozent": 0.8,
+            "erg_Menge": 0.08520741328030491,
+            "pH": 4.65
+        }
+    ],
+    "Rasten": [
+        {
+            "Dauer": 5,
+            "Mengenfaktor": 1,
+            "Name": "Einmaischen",
+            "Param1": 42.34757670319025,
+            "Param2": 0,
+            "Param3": 18,
+            "Param4": 0,
+            "Temp": 40,
+            "Typ": 0
+        },
+        {
+            "Dauer": 5,
+            "Mengenfaktor": 1,
+            "Name": "Eiweissrast (57°)",
+            "Param1": "",
+            "Param2": "",
+            "Param3": "",
+            "Param4": "",
+            "Temp": 50,
+            "Typ": 1
+        },
+        {
+            "Dauer": 25,
+            "Mengenfaktor": 1,
+            "Name": "Maltoserast (60°-65°)",
+            "Param1": 0,
+            "Param2": 0,
+            "Param3": 0,
+            "Param4": 0,
+            "Temp": 62,
+            "Typ": 1
+        },
+        {
+            "Dauer": 30,
+            "Mengenfaktor": 1,
+            "Name": "Verzuckerung (70°-75°)",
+            "Param1": 0,
+            "Param2": 0,
+            "Param3": 0,
+            "Param4": 0,
+            "Temp": 72,
+            "Typ": 1
+        },
+        {
+            "Dauer": 1,
+            "Mengenfaktor": 1,
+            "Name": "Abmaischen (78°)",
+            "Param1": 0,
+            "Param2": 0,
+            "Param3": 0,
+            "Param4": 0,
+            "Temp": 78,
+            "Typ": 1
+        }
+    ],
+    "Sud": {
+        "Abfuelldatum": "2021-01-20T13:05:28.000",
+        "Anlage": "Braukessel 68l",
+        "AusbeuteIgnorieren": 0,
+        "Braudatum": "2021-01-20T13:05:28.000",
+        "CO2": 5,
+        "Erstellt": "2021-01-09T18:28:54.000",
+        "FaktorHauptguss": 4.199999999999999,
+        "Gespeichert": "2021-01-20T18:21:45.000",
+        "IBU": 20,
+        "JungbiermengeAbfuellen": 51.6,
+        "Kategorie": "UG",
+        "Kochdauer": 80,
+        "Kommentar": "####\n\nEinmaischen bei 47°C\nviel zu schnell eingemischt: Rührwerk blieb stecken\nca. 5min bei 487-50°C verweilt\nMaltoserast auf 25min verlängert (gem Rezept Jan)\nin den Aufheizphasen RHE manuell dazugeschaltet mit 25%\n\n\nNachguss: von 19,7 l wurden 5l im Läuterbottich vorgelegt\nAusgangsmenge 44-45l für eff 2 NC Kegs je 16,5l\nAromahopfen 22gr statt 18gr\n\nHefe: 0,5l frische Erntehefe von Helles 11.2020\nAngestellt bei 15°C\nAbsenkung auf 8°C\nAuf 10°C kommen lassen (leichter Schwefelgeruch)\nBei 65% sEVG auf 14°C kommen lassen (Kühlung ausgeschaltet)\n\n\nCaraFa auf Stufe 2 gemahlen\n\nGärverlauf: Empfehlung von Ulrich, Weihenstephan\nAnstellen bei 8°C \nnach Ankommen der Hefe langsam (+0,5°C pro Tag) bis 10°C \nBei 10°C bis mind. 50% sEVG vergären, \nauf 14°C kommen lassen und endvergären\nNach Ende der Gärung noch 24h Diacetylrast bei 16°-17°C\nDanach 48h Coldcrash.\n\nMaximale Menge Nachguss ca. 18 Liter!!! \nMinimale Menge Nachguss ca. 6 Liter!\n",
+        "KostenWasserStrom": 0,
+        "Menge": 55,
+        "MerklistenID": 0,
+        "Nachisomerisierungszeit": 15,
+        "Reifezeit": 2,
+        "RestalkalitaetSoll": 2.14,
+        "SW": 12.200000000000001,
+        "SWAnstellen": 12.200000000000001,
+        "SWJungbier": 12.200000000000001,
+        "SWKochbeginn": 12.200000000000001,
+        "SWKochende": 13.4,
+        "SWSchnellgaerprobe": 12.200000000000001,
+        "SchnellgaerprobeAktiv": 1,
+        "Speisemenge": 0,
+        "Spunden": 0,
+        "Status": 1,
+        "Sudhausausbeute": 66.1,
+        "Sudname": "Dunkles 01.2021",
+        "Sudnummer": 0,
+        "TemperaturJungbier": 9.7,
+        "Verdampfungsrate": 6.5,
+        "Vergaerungsgrad": 76,
+        "VerschneidungAbfuellen": 1,
+        "Wasserprofil": "Baumener Wasser",
+        "WuerzemengeAnstellen": 51.6,
+        "WuerzemengeKochbeginn": 55,
+        "WuerzemengeKochende": 47,
+        "WuerzemengeVorHopfenseihen": 47,
+        "berechnungsArtHopfen": 0,
+        "erg_AbgefuellteBiermenge": 52.6,
+        "erg_Alkohol": 0.365657546691164,
+        "erg_EffektiveAusbeute": 62.01381818181817,
+        "erg_Farbe": 51.20747999999999,
+        "erg_Preis": 0.4664853658145958,
+        "erg_S_Gesamt": 10.650926660038113,
+        "erg_Sudhausausbeute": 62.34133934586632,
+        "erg_WHauptguss": 44.733891972160066,
+        "erg_WNachguss": 18.157664288143188,
+        "erg_W_Gesamt": 73.89155626030325,
+        "highGravityFaktor": 25
+    }
+}

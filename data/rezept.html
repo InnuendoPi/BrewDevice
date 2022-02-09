@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Rezept</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="styles.min.css"> -->
+</head>
+
+<body onload="setInterval(refresh, 3000)">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+                    <div class="container"><a class="navbar-brand" href="/index.html">BrewDevice</a><button
+                            class="navbar-toggler" data-toggle="collapse"><span class="sr-only">Toggle
+                                navigation</span><span class="navbar-toggler-icon"></span></button>
+                        <a href="/rezept.html" class="btn btn-outline-link">Rezept</a>
+                        <a href="/edit" class="btn btn-outline-link" id="btn-edit">Dateiexplorer</a>
+                        <button type="button" class="btn btn-outline-link" id="btn-reboot">Neustart</button>
+                        <!-- <button class="btn btn-outline-link" data-toggle="modal" data-target="#modal-system"
+                            type="button">System</button> -->
+                    </div>
+                </nav>
+
+                <!-- <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+                    <div class="container"><a class="navbar-brand" href="/index.html">BrewDevice</a>
+                        <button class="navbar-toggler" data-toggle="collapse"><span class="sr-only">Toggle
+                                navigation</span><span class="navbar-toggler-icon"></span></button>
+                    </div>
+                </nav> -->
+                <div class="container">
+                    <label for="Txt-Misc-Rezeptname">
+                        Rezeptname: <input name="Txt-Misc-Rezeptname" id="Txt-Misc-Rezeptname" placeholder="">
+                    </label><br>
+                    <div class="row">
+                        <div class="col">
+                            <form action="/upload" method="post" id="upload" enctype="multipart/form-data"
+                                onsubmit="return">
+                                <input type="file" name="name">
+                                <input class="button" type="submit" value="Import">
+                            </form>
+                            <p>Im KBH2 für den Export aktivieren: Rasten, Hopfengaben und Sud</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top my-3"></div>
+                <div class="container" id="Con_Maischeplan" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <h3 class="text-dark mb-4">Maischeplan</h3>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-success save-maische">Speichern</button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-warning discard-maische">Verwerfen</button>
+                        </div>
+                        <div class="col-auto text-right" style="margin-bottom: 30px;">
+                            <button type="button" class="btn btn-outline-primary add-maische">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon icon-tabler icon-tabler-plus">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>&nbsp;Maischeschritt hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="card" id="Card_Maischeplan">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="maische" class="table1 table-striped table tablesorter">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-left">Nr</th>
+                                                <th class="text-left">Rasten</th>
+                                                <th class="text-center">Dauer</th>
+                                                <th class="text-center">Temperatur</th>
+                                                <th class="text-center filter-false sorter-false">Aktionen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center" id="dataMaische">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top my-3"></div>
+                <div class="container" id="TableSorterCon2" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <h3 class="text-dark mb-4">Hopfengabe und Zutaten</h3>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-success save-hopfen">Speichern</button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-warning discard-hopfen">Verwerfen</button>
+                        </div>
+                        <div class="col-auto text-right" style="margin-bottom: 30px;">
+                            <button type="button" class="btn btn-outline-primary add-hopfen">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon icon-tabler icon-tabler-plus">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>&nbsp;Hopfengabe hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="card" id="TableSorterCard2">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="hopfen" class="table1 table-striped table tablesorter">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-left">Hopfen</th>
+                                                <th class="text-center">Rast</th>
+                                                <th class="text-center">Kochdauer</th>
+                                                <th class="text-center">Menge</th>
+                                                <th class="text-center filter-false sorter-false">Aktionen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center" id="dataHopfen">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top my-3"></div>
+                <div class="container" id="TableSorterCon3" style="padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <h3 class="text-dark mb-4">Aufgaben und Reminder</h3>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-success save-sonstiges">Speichern</button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-outline-warning discard-sonstiges">Verwerfen</button>
+                        </div>
+                        <div class="col-auto text-right" style="margin-bottom: 30px;">
+                            <button type="button" class="btn btn-outline-primary add-sonstiges">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewbox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon icon-tabler icon-tabler-plus">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>&nbsp;Aufgabe hinzufügen</button>
+                        </div>
+                    </div>
+
+                    <div class="card" id="TableSorterCard3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="sonstiges" class="table1 table-striped table tablesorter">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-left">Aufgabe</th>
+                                                <th class="text-center">Rast</th>
+                                                <th class="text-center">Option</th>
+                                                <th class="text-center">Power</th>
+                                                <th class="text-center">Temperatur</th>
+                                                <th class="text-center">Zeitpunkt</th>
+                                                <th class="text-center filter-false sorter-false">Aktionen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center" id="dataSonstiges">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--
+                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous"><div class="card" id="TableSorterCard3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="sonstiges" class="table1 table-striped table tablesorter">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-center">Name</th>
+                                                
+                                                <th class="text-center">Zeitpunkt</th>
+                                                <th class="text-center filter-false sorter-false">Aktionen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr>
+                                                <td class="text-left">Hefestarteter ansetzen</td>
+                                                
+                                                <td>Einmaischen</td>
+                                                <td class="text-center"><a class="edit" title="Edit"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icon-tabler-pencil"
+                                                            style="color: var(--success);">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path
+                                                                d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4">
+                                                            </path>
+                                                            <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                                                        </svg></a><a class="delete" title="Delete"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icon-tabler-trash"
+                                                            style="color: var(--danger);">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <line x1="4" y1="7" x2="20" y2="7"></line>
+                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12">
+                                                            </path>
+                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                                        </svg></a><a class="save" title="Save"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icon-tabler-download">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                                            <polyline points="7 11 12 16 17 11"></polyline>
+                                                            <line x1="12" y1="4" x2="12" y2="16"></line>
+                                                        </svg></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Milchsäure</td>
+                                                
+                                                <td>Einmaischen</td>
+                                                <td class="text-center"><a class="edit" title="Edit"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icon-tabler-pencil"
+                                                            style="color: var(--success);">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path
+                                                                d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4">
+                                                            </path>
+                                                            <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                                                        </svg></a><a class="delete" title="Delete"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icon-tabler-trash"
+                                                            style="color: var(--danger);">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <line x1="4" y1="7" x2="20" y2="7"></line>
+                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12">
+                                                            </path>
+                                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                                        </svg></a><a class="save" title="Save"><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewbox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                            fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="icon icon-tabler icon-tabler-download">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                                            <polyline points="7 11 12 16 17 11"></polyline>
+                                                            <line x1="12" y1="4" x2="12" y2="16"></line>
+                                                        </svg></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                -->
+                </div>
+            </div>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><svg xmlns="http://www.w3.org/2000/svg"
+                width="1em" height="1em" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-chevrons-up">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <polyline points="7 11 12 6 17 11"></polyline>
+                <polyline points="7 17 12 12 17 17"></polyline>
+            </svg></a>
+    </div>
+    <script src="./jquery.min.js"></script>
+    <script src="./tabletojson.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        function refresh() {
+        }
+
+
+        function readDataMaische() {
+            console.info('read Maische');
+            $.get("/reqMaische", function (data) {
+                let content = "";
+                $.each(data, function (i, element) {
+                    // console.info("# " + i + " Name: " + element.Name + " Dauer: " + element.Dauer + " Temperatur: "+ element.Temp + "\n");
+                    let daten = "<tr>"
+                    daten += "<td class='text-left'>" + (i + 1) + "</td>";
+                    daten += "<td class='text-left'>" + element.Rasten + "</td>";
+                    daten += "<td class='text-center'>" + element.Dauer + "</td>";
+                    daten += "<td class='text-center'>" + element.Temperatur + "</td>";
+                    daten += "<td class='text-center'>";
+                    daten += "<a class='edit' title='Edit'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-pencil' style='color: var(--success);'> <path stroke='none' d='M0 0h24v24H0z' fill='none'></path> <path d='M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4'></path><line x1='13.5' y1='6.5' x2='17.5' y2='10.5'></line></svg></a>";
+                    daten += "<a class='delete' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-trash' style='color: var(--danger);'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><line x1='4' y1='7' x2='20' y2='7'></line><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line><path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12'></path><path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3'></path></svg></a>";
+                    daten += "<a class='save' title='Save'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-download'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2'></path><polyline points='7 11 12 16 17 11'></polyline><line x1='12' y1='4' x2='12' y2='16'></line></svg></a>";
+                    daten += "</td>";
+                    daten += "</tr>";
+                    content += daten;
+                });
+                $('#dataMaische').html(content);
+            });
+        }
+
+        function readDataHopfen() {
+            console.info('read Hopfen');
+            $.get("/reqHopfen", function (data) {
+                let content = "";
+                $.each(data, function (i, element) {
+                    // console.info("# " + i + " " + element.Name + "\n");
+                    let daten = "<tr>"
+                    daten += "<td class='text-left'>" + element.Hopfen + "</td>";
+                    daten += "<td class='text-center'>" + element.Rast + "</td>";
+                    daten += "<td class='text-center'>" + element.Kochdauer + "</td>";
+                    daten += "<td class='text-center'>" + element.Menge + "</td>";
+                    daten += "<td class='text-center'>";
+                    daten += "<a class='edit' title='Edit'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-pencil' style='color: var(--success);'> <path stroke='none' d='M0 0h24v24H0z' fill='none'></path> <path d='M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4'></path><line x1='13.5' y1='6.5' x2='17.5' y2='10.5'></line></svg></a>";
+                    daten += "<a class='delete' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-trash' style='color: var(--danger);'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><line x1='4' y1='7' x2='20' y2='7'></line><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line><path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12'></path><path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3'></path></svg></a>";
+                    daten += "<a class='save' title='Save'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-download'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2'></path><polyline points='7 11 12 16 17 11'></polyline><line x1='12' y1='4' x2='12' y2='16'></line></svg></a>";
+                    daten += "</td>";
+                    daten += "</tr>";
+                    content += daten;
+                });
+                $('#dataHopfen').html(content);
+            });
+        }
+
+        function readDataSonstiges() {
+            console.info('read Sonstiges');
+            $.get("/reqSonstiges", function (data) {
+                let content = "";
+                $.each(data, function (i, element) {
+                    // console.info("Aufgabe # " + i + " " + element.Aufgabe + " " + element.Rast + " " + "\n");
+                    let daten = "<tr>"
+                    daten += "<td class='text-left'>" + element.Aufgabe + "</td>";
+                    daten += "<td class='text-center'>" + element.Rast + "</td>";
+                    // daten += "<td class='text-center'>" + element.Schritt + "</td>";
+                    daten += "<td class='text-center'>" + element.Option + "</td>";
+                    // daten += "<td select class='form-control'>" + element.Option + "</select></td>";
+                    // '<td align="center"><select class="form-control" name="Option" id="Option"><option>Ein</option><option>Aus</option><option>Pause</option></select></td>' +
+                    daten += "<td class='text-center'>" + element.Power + "</td>";
+                    daten += "<td class='text-center'>" + element.Temperatur + "</td>";
+                    daten += "<td class='text-center'>" + element.Zeitpunkt + "</td>";
+                    daten += "<td class='text-center'>";
+                    daten += "<a class='edit' title='Edit'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-pencil' style='color: var(--success);'> <path stroke='none' d='M0 0h24v24H0z' fill='none'></path> <path d='M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4'></path><line x1='13.5' y1='6.5' x2='17.5' y2='10.5'></line></svg></a>";
+                    daten += "<a class='delete' title='Delete'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-trash' style='color: var(--danger);'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><line x1='4' y1='7' x2='20' y2='7'></line><line x1='10' y1='11' x2='10' y2='17'></line><line x1='14' y1='11' x2='14' y2='17'></line><path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12'></path><path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3'></path></svg></a>";
+                    daten += "<a class='save' title='Save'><svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewbox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icon-tabler-download'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2'></path><polyline points='7 11 12 16 17 11'></polyline><line x1='12' y1='4' x2='12' y2='16'></line></svg></a>";
+                    daten += "</td>";
+                    daten += "</tr>";
+                    content += daten;
+                });
+                $('#dataSonstiges').html(content);
+            });
+        }
+
+        $(".save-maische").click(function () {
+            var table = $('#maische').tableToJSON(); // Convert the table into a javascript object
+            console.log(table);
+            // alert(JSON.stringify(table));
+            $.ajax({
+                url: '/setMaischeTable',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(table)
+            });
+        });
+
+        $(".discard-maische").click(function () {
+
+        });
+
+        $(".save-hopfen").click(function () {
+            var table = $('#hopfen').tableToJSON(); // Convert the table into a javascript object
+            console.log(table);
+            // alert(JSON.stringify(table));
+            $.ajax({
+                url: '/setHopfenTable',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(table)
+            });
+        });
+        $(".discard-hopfen").click(function () {
+
+        });
+        $(".save-sonstiges").click(function () {
+            var table = $('#sonstiges').tableToJSON(); // Convert the table into a javascript object
+            console.log(table);
+            // alert(JSON.stringify(table));
+            $.ajax({
+                url: '/setSonstigesTable',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(table)
+            });
+        });
+        $(".discard-sonstiges").click(function () {
+
+        });
+
+
+        $(".add-maische").click(function () {
+            $(this).attr("disabled", "disabled");
+            //var index = $("maische tbody tr:last-child").index();
+            var tbody = $('#maische').children('tbody');
+            var table1 = tbody.length ? tbody : $('#maische');
+            var row = '<tr>' +
+                '<td align="left"><input type="text" class="form-control" name="Nr" id="Nr"></td>' +
+                '<td align="left"><input type="text" class="form-control" name="Rasten" id="Rasten"></td>' +
+                '<td align="center"><input type="text" class="form-control" name="Dauer" id="Dauer"></td>' +
+                '<td align="center"><input type="text" class="form-control" name="Temperatur" id="Temperatur"></td>' +
+                '<td class="text-center"><a class="edit" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-pencil">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>' +
+                '<line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>' +
+                '</svg></a><a class="delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<line x1="4" y1="7" x2="20" y2="7"></line>' +
+                '<line x1="10" y1="11" x2="10" y2="17"></line>' +
+                '<line x1="14" y1="11" x2="14" y2="17"></line>' +
+                '<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>' +
+                '<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>' +
+                '</svg></a><a class="save" title="Save"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-download">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>' +
+                '<polyline points="7 11 12 16 17 11"></polyline>' +
+                '<line x1="12" y1="4" x2="12" y2="16"></line>' +
+                '</svg></a></td>"' +
+                '</tr>';
+            table1.append(row);
+            //$("maische").append(row);
+            //$("table_maischeplan tbody tr").eq(index + 1).find(".save, .edit").toggle();
+        });
+
+
+        $(".add-hopfen").click(function () {
+            $(this).attr("disabled", "disabled");
+            var tbody = $('#hopfen').children('tbody');
+            var table1 = tbody.length ? tbody : $('#hopfen');
+            var row = '<tr>' +
+                '<td align="left"><input type="text" class="form-control" name="Hopfen" id="Hopfen"></td>' +
+                // '<td align="center"><input type="text" class="form-control" name="Rast" id="Rast"></td>' +
+                '<td align="center"><select class="form-control" name="Rast" id="Rast">' + steps + '</select></td>' +
+                '<td align="center"><input type="text" class="form-control" name="Kochdauer" id="Kochdauer"></td>' +
+                '<td align="center"><input type="text" class="form-control" name="Menge" id="Menge"></td>' +
+                '<td class="text-center"><a class="edit" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-pencil">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>' +
+                '<line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>' +
+                '</svg></a><a class="delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<line x1="4" y1="7" x2="20" y2="7"></line>' +
+                '<line x1="10" y1="11" x2="10" y2="17"></line>' +
+                '<line x1="14" y1="11" x2="14" y2="17"></line>' +
+                '<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>' +
+                '<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>' +
+                '</svg></a><a class="save" title="Save"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-download">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>' +
+                '<polyline points="7 11 12 16 17 11"></polyline>' +
+                '<line x1="12" y1="4" x2="12" y2="16"></line>' +
+                '</svg></a></td>"' +
+                '</tr>';
+            table1.append(row);
+        });
+
+        $(".add-sonstiges").click(function () {
+            $(this).attr("disabled", "disabled");
+            var tbody = $('#sonstiges').children('tbody');
+            var table1 = tbody.length ? tbody : $('#sonstiges');
+            // $('#steps-count').load('/reqStepsCount');
+
+            console.info("Steps 2:" + steps + "\n");
+            // $('#Rast').load('<option>1</option><option>2</option><option>3</option>');
+            // var Rast = "<option>1</option><option>2</option><option>3</option>";
+            var row = '<tr>' +
+                // '<td align="left"><select class="form-control" id="Name" name="Name"><option>Maische-Sud</option><option>Nachguss</option><option>Rührwerk</option><option>Pumpe</option><option>RHE</option></select></td>' +
+                '<td align="left"><select class="form-control" id="Name" name="Name">' + actNames + '</select></td>' +
+                
+                // '<td align="left"><input type="text" class="form-control" name="Name" id="Name"></td>' +
+                // '<td align="center"><input type="text" class="form-control" name="Rast" id="Rast"></td>' +
+                // '<td align="center"><select class="form-control" name="Rast" id="Rast"> <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></td>' +
+                '<td align="center"><select class="form-control" name="Rast" id="Rast">' + steps + '</select></td>' +
+                // '<td align="center"><input type="text" class="form-control" name="Option" id="Option"><option>Ein</option><option>Aus</option></td>' +
+                '<td align="center"><select class="form-control" name="Option" id="Option"><option>Ein</option><option>Aus</option><option>Pause</option></select></td>' +
+                '<td align="center"><input type="text" class="form-control" name="Power" id="Power"></td>' +
+                '<td align="center"><input type="text" class="form-control" name="Temperatur" id="Temp"></td>' +
+                // '<td align="center"><input type="text" class="form-control" name="Zeitpunkt" id="Zeit"><option>Start</option><option>Ende</option></td>' +
+                '<td align="center"><select class="form-control" name="Zeitpunkt" id="Zeit"><option>Start</option><option>Ende</option></select></td>' +
+                '<td class="text-center"><a class="edit" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-pencil">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>' +
+                '<line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>' +
+                '</svg></a><a class="delete" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<line x1="4" y1="7" x2="20" y2="7"></line>' +
+                '<line x1="10" y1="11" x2="10" y2="17"></line>' +
+                '<line x1="14" y1="11" x2="14" y2="17"></line>' +
+                '<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>' +
+                '<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>' +
+                '</svg></a><a class="save" title="Save"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-download">' +
+                '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>' +
+                '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>' +
+                '<polyline points="7 11 12 16 17 11"></polyline>' +
+                '<line x1="12" y1="4" x2="12" y2="16"></line>' +
+                '</svg></a></td>"' +
+                '</tr>';
+            table1.append(row);
+        });
+
+        // Edit row on edit button click
+        $(document).on("click", ".edit", function () {
+            $(this).parents("tr").find("td:not(:last-child)").each(function () {
+                $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+            });
+
+            //$(this).parents("tr").find(".edit").toggle();
+            //$(".add-new").attr("disabled", "disabled");
+        });
+
+        // Save row on save button click
+        $(document).on("click", ".save", function () {
+            var empty = false;
+            var input = $(this).parents("tr").find('input[type="text"]');
+            input.each(function () {
+                if (!$(this).val()) {
+                    $(this).addClass("error");
+                    empty = true;
+                } else {
+                    $(this).removeClass("error");
+                }
+            });
+            $(this).parents("tr").find(".error").first().focus();
+            if (!empty) {
+                input.each(function () {
+                    $(this).parent("td").html($(this).val());
+                });
+                //$(this).parents("tr").find(".edit").toggle();
+                $(".add-maische").removeAttr("disabled");
+                $(".add-hopfen").removeAttr("disabled");
+                $(".add-sonstiges").removeAttr("disabled");
+            }
+        });
+
+        // Delete row on delete button click
+        $(document).on("click", ".delete", function () {
+            $(this).parents("tr").remove();
+            //$(".add-new").removeAttr("disabled");
+        });
+
+        function upRezName() {
+            $.get("/reqWeb", function (data) {
+                $('#Txt-Misc-Rezeptname').val(data.rezeptname);
+            });
+        }
+
+        function KBH2Import(event) {
+            console.log('Lade Tabellen')
+            readDataMaische();
+            readDataHopfen();
+            readDataSonstiges();
+        }
+        
+        var steps;
+        var actNames;
+        $(window).on('load', function () {
+
+            upRezName();
+            KBH2Import();
+            
+            $.get("/reqStepsCount", function (data) {
+                steps = data;
+                console.info("Steps 1:" + steps + "\n");
+            });
+            $.get("/reqActNames", function (data) {
+                actNames = data;
+                console.info("Actor names 1:" + actNames + "\n");
+            });
+        })
+
+        upload.addEventListener('submit', KBH2Import);
+
+    </script>
+</body>
+
+</html>
