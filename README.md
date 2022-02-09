@@ -1,5 +1,7 @@
 # BrewDevice
 
+Das Projekt ist aktuell eingestellt. Der Sketch ist nicht fertiggestellt oder gebrauchstauglich!
+
 BrewDevice ist ein Arduino Sketch für die Module ESP8266 Wemos D1 mini. BrewDevice ist eine Brausteuerung. Brewdevice steuert folgende Geräte:
 
 - Induktionskochfeld GGM IDS2
