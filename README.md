@@ -22,7 +22,9 @@ Der Automatik-Modus bietet sich für das Infusionsverfahren an. Der manuelle Mod
 
 ## Dokumentation
 
-Eine ausführliche Dokumentation liegt auf github pages: <https://innuendopi.github.io/BrewDevice/>
+![Startseite](tools/main.jpg)
+
+![Rezept](tools/rezept.jpg)
 
 ## Sketch Information
 
