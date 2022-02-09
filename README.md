@@ -9,7 +9,7 @@ BrewDevice ist ein Arduino Sketch für die Module ESP8266 Wemos D1 mini. BrewDev
 - Aktor für den Nachguss
 - Aktor für ein Rührwerk
 - Aktor für eine Pumpe
-- Aktor für eom Ringheizelement
+- Aktor für eim Ringheizelement
 - Piezzo Buzzer
 
 BrewDevice unterstützt den Import von Braurezepten aus
@@ -28,9 +28,9 @@ Der Automatik-Modus bietet sich für das Infusionsverfahren an. Der manuelle Mod
 
 ## Sketch Information
 
-Bibliotheken: (Stand ab Version 1.000, 01.2021)
+Bibliotheken:
 
-- ESP8266 2.7.4 (SPIFFS)
+- ESP8266 3.0.2 (LittleFS)
 - Arduino IDE 1.8.13
 - Visual Code 1.52.1
 - PubSubClient 2.8.0
