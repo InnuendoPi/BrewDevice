@@ -2,12 +2,13 @@ void handleRoot()
 {
   server.sendHeader("Location", "/index.html", true); //Redirect to our html web page
   server.send(302, "text/plain", "");
+  // server.sendHeader(PSTR("Content-Encoding"), "gzip");
+  // server.send(200, "text/html", index_htm_gz, sizeof(index_htm_gz));
 }
 
 void handleWebRequests()
 {
-  // Serial.print("Web req not found: ");
-  if (loadFromLittleFS(server.uri()))
+  if (loadFromLittlefs(server.uri()))
   {
     return;
   }
@@ -24,10 +25,9 @@ void handleWebRequests()
     message += " NAME:" + server.argName(i) + "\n VALUE:" + server.arg(i) + "\n";
   }
   server.send(404, "text/plain", message);
-  // Serial.println(message);
 }
 
-bool loadFromLittleFS(String path)
+bool loadFromLittlefs(String path)
 {
   String dataType = "text/plain";
   if (path.endsWith("/"))

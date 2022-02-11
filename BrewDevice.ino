@@ -17,6 +17,8 @@
 #include <WiFiClientSecure.h>
 #include <WiFiClientSecureBearSSL.h>
 #include <NTPClient.h>
+#include "edit_htm.h"
+#include <FS.h>
 #include "InnuTicker.h"
 #include <PID_v1.h>
 #include <PID_AutoTune_v0.h>
@@ -319,6 +321,10 @@ unsigned long upInflux = 15000;
 
 // FSBrowser
 File fsUploadFile; // a File object to temporarily store the received file
+enum { MSG_OK, CUSTOM, NOT_FOUND, BAD_REQUEST, ERROR };
+#define TEXT_PLAIN "text/plain"
+#define FS_INIT_ERROR "FS INIT ERROR"
+#define FILE_NOT_FOUND "FileNotFound"
 
 #define ALARM_ON 1
 #define ALARM_OFF 2

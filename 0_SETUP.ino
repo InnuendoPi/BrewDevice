@@ -36,7 +36,7 @@ void setup()
     Serial.printf("*** SYSINFO Starte Setup LITTLEFS Free Heap: %d\n", ESP.getFreeHeap());
 
     // Prüfe WebUpdate
-    updateSys();
+    // updateSys();
 
     // Erstelle Ticker Objekte
     setTicker();
@@ -96,34 +96,10 @@ void setup()
 
 void setupServer()
 {
-  // server.on("/setupActor", handleSetActor);       // Einstellen der Aktoren
-  // server.on("/setupSensor", handleSetSensor);     // Einstellen der Sensoren
-
-  // server.on("/reqActors", handleRequestActors);   // Liste der Aktoren ausgeben
-  // server.on("/reqInduction", handleRequestInduction);
-
-  // server.on("/reqSensors", handleRequestSensors); // alle Sensoren: Name + Value + Offset
-  // server.on("/reqSensor", handleRequestSensor); // alle Sensoren: Name + Value
-  // server.on("/reqActor", handleRequestActor);   // Infos der Aktoren für WebConfig
-  // server.on("/reqIndu", handleRequestIndu);     // Infos der Indu für WebConfig
-  // server.on("/setSensor", handleSetSensor);     // Sensor ändern
-  // server.on("/setActor", handleSetActor);       // Aktor ändern
-  // server.on("/setIndu", handleSetIndu);         // Indu ändern
-  // server.on("/delSensor", handleDelSensor);     // Sensor löschen
-  // server.on("/delActor", handleDelActor);       // Aktor löschen
-
-  // server.on("/reqDisplay", handleRequestDisplay);
-  // server.on("/reqDisp", handleRequestDisp); // Infos Display für WebConfig
-  // server.on("/setDisp", handleSetDisp);     // Display ändern
-  // server.on("/reqMiscSet", handleRequestMiscSet);
-
   server.on("/", handleRoot);
   server.on("/reqPins", handlereqPins);
   server.on("/reqSearchSensorAdresses", handleRequestSensorAddresses);
   server.on("/reboot", rebootDevice);
-  // server.on("/reqMisc", handleRequestMisc);
-  // server.on("/setMisc", handleSetMisc);
-  server.on("/startHTTPUpdate", startHTTPUpdate);
   server.on("/visualisieren", visualisieren);
   
   server.on("/reqMS", handleRequestMS);
@@ -171,34 +147,14 @@ void setupServer()
   
 
   // FSBrowser initialisieren
-  server.on("/list", HTTP_GET, handleFileList); // Verzeichnisinhalt
-  server.on("/edit", HTTP_GET, []() {           // Lade Editor
-    if (!handleFileRead("/edit.htm"))
-    {
-      server.send(404, "text/plain", "FileNotFound");
-    }
-  });
-  server.on("/edit", HTTP_PUT, handleFileCreate);    // Datei erstellen
-  server.on("/edit", HTTP_DELETE, handleFileDelete); // Datei löschen
-  server.on(
-      "/edit", HTTP_POST, []() {
-        server.send(200, "text/plain", "");
-      },
-      handleFileUpload);
-
-  // server.on(
-  //     "/rezept.html", HTTP_POST,  // if the client posts to the upload page
-  //     []() { server.send(200); }, // Send status 200 (OK) to tell the client we are ready to receive
-  //     handleRezeptUp              // Receive and save the file
-  // );
-
-  server.on(
-      "/upload", HTTP_POST,       // if the client posts to the upload page
-      []() { server.send(200); }, // Send status 200 (OK) to tell the client we are ready to receive
-      handleRezeptUp              // Receive and save the file
-  );
-
-  server.onNotFound(handleWebRequests); // Sonstiges
+  server.on("/edit", HTTP_GET, handleGetEdit);
+  server.on("/status", HTTP_GET, handleStatus);
+  server.on("/list", HTTP_GET, handleFileList);
+  server.on("/edit", HTTP_PUT, handleFileCreate);
+  server.on("/favicon.ico", HTTP_GET, replyOK);
+  server.on("/edit", HTTP_DELETE, handleFileDelete);
+  server.on("/edit", HTTP_POST, []() { server.send(200, "text/plain", ""); }, handleFileUpload);
+  server.onNotFound(handleWebRequests);
 
   httpUpdate.setup(&server);
   server.begin();

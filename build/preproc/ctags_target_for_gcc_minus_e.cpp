@@ -24,12 +24,14 @@
 # 24 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
 # 25 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
 # 26 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
+# 27 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
+# 28 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
 
 extern "C"
 {
-# 30 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
+# 32 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino" 2
 }
-# 46 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino"
+# 48 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino"
 // Version
 
 
@@ -306,11 +308,8 @@ unsigned long upInflux = 15000;
 
 // FSBrowser
 File fsUploadFile; // a File object to temporarily store the received file
-
-
-
-
-
+enum { MSG_OK, CUSTOM, NOT_FOUND, BAD_REQUEST, ERROR };
+# 333 "c:\\Arduino\\git\\BrewDevice\\BrewDevice.ino"
 const int PIN_BUZZER = D8; // Buzzer
 bool startBuzzer = false; // Aktiviere Buzzer
 
@@ -360,7 +359,7 @@ void setup()
     Serial.printf("*** SYSINFO Starte Setup LITTLEFS Free Heap: %d\n", ESP.getFreeHeap());
 
     // Prüfe WebUpdate
-    updateSys();
+    // updateSys();
 
     // Erstelle Ticker Objekte
     setTicker();
@@ -420,34 +419,10 @@ void setup()
 
 void setupServer()
 {
-  // server.on("/setupActor", handleSetActor);       // Einstellen der Aktoren
-  // server.on("/setupSensor", handleSetSensor);     // Einstellen der Sensoren
-
-  // server.on("/reqActors", handleRequestActors);   // Liste der Aktoren ausgeben
-  // server.on("/reqInduction", handleRequestInduction);
-
-  // server.on("/reqSensors", handleRequestSensors); // alle Sensoren: Name + Value + Offset
-  // server.on("/reqSensor", handleRequestSensor); // alle Sensoren: Name + Value
-  // server.on("/reqActor", handleRequestActor);   // Infos der Aktoren für WebConfig
-  // server.on("/reqIndu", handleRequestIndu);     // Infos der Indu für WebConfig
-  // server.on("/setSensor", handleSetSensor);     // Sensor ändern
-  // server.on("/setActor", handleSetActor);       // Aktor ändern
-  // server.on("/setIndu", handleSetIndu);         // Indu ändern
-  // server.on("/delSensor", handleDelSensor);     // Sensor löschen
-  // server.on("/delActor", handleDelActor);       // Aktor löschen
-
-  // server.on("/reqDisplay", handleRequestDisplay);
-  // server.on("/reqDisp", handleRequestDisp); // Infos Display für WebConfig
-  // server.on("/setDisp", handleSetDisp);     // Display ändern
-  // server.on("/reqMiscSet", handleRequestMiscSet);
-
   server.on("/", handleRoot);
   server.on("/reqPins", handlereqPins);
   server.on("/reqSearchSensorAdresses", handleRequestSensorAddresses);
   server.on("/reboot", rebootDevice);
-  // server.on("/reqMisc", handleRequestMisc);
-  // server.on("/setMisc", handleSetMisc);
-  server.on("/startHTTPUpdate", startHTTPUpdate);
   server.on("/visualisieren", visualisieren);
 
   server.on("/reqMS", handleRequestMS);
@@ -495,34 +470,14 @@ void setupServer()
 
 
   // FSBrowser initialisieren
-  server.on("/list", HTTP_GET, handleFileList); // Verzeichnisinhalt
-  server.on("/edit", HTTP_GET, []() { // Lade Editor
-    if (!handleFileRead("/edit.htm"))
-    {
-      server.send(404, "text/plain", "FileNotFound");
-    }
-  });
-  server.on("/edit", HTTP_PUT, handleFileCreate); // Datei erstellen
-  server.on("/edit", HTTP_DELETE, handleFileDelete); // Datei löschen
-  server.on(
-      "/edit", HTTP_POST, []() {
-        server.send(200, "text/plain", "");
-      },
-      handleFileUpload);
-
-  // server.on(
-  //     "/rezept.html", HTTP_POST,  // if the client posts to the upload page
-  //     []() { server.send(200); }, // Send status 200 (OK) to tell the client we are ready to receive
-  //     handleRezeptUp              // Receive and save the file
-  // );
-
-  server.on(
-      "/upload", HTTP_POST, // if the client posts to the upload page
-      []() { server.send(200); }, // Send status 200 (OK) to tell the client we are ready to receive
-      handleRezeptUp // Receive and save the file
-  );
-
-  server.onNotFound(handleWebRequests); // Sonstiges
+  server.on("/edit", HTTP_GET, handleGetEdit);
+  server.on("/status", HTTP_GET, handleStatus);
+  server.on("/list", HTTP_GET, handleFileList);
+  server.on("/edit", HTTP_PUT, handleFileCreate);
+  server.on("/favicon.ico", HTTP_GET, replyOK);
+  server.on("/edit", HTTP_DELETE, handleFileDelete);
+  server.on("/edit", HTTP_POST, []() { server.send(200, "text/plain", ""); }, handleFileUpload);
+  server.onNotFound(handleWebRequests);
 
   httpUpdate.setup(&server);
   server.begin();
@@ -733,7 +688,7 @@ void handleRequestSensorAddresses()
   {
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 179 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "179" "." "292" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "179" "." "293" "\", \"aSM\", @progbits, 1 #"))) = (
 # 179 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino"
               "<option>"
 # 179 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
@@ -743,7 +698,7 @@ void handleRequestSensorAddresses()
     message += SensorAddressToString(sensors[id].sens_address);
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 181 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "181" "." "293" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "181" "." "294" "\", \"aSM\", @progbits, 1 #"))) = (
 # 181 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino"
               "</option><option disabled>──────────</option>"
 # 181 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
@@ -757,7 +712,7 @@ void handleRequestSensorAddresses()
   {
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 187 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "187" "." "294" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "187" "." "295" "\", \"aSM\", @progbits, 1 #"))) = (
 # 187 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino"
               "<option>"
 # 187 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
@@ -767,7 +722,7 @@ void handleRequestSensorAddresses()
     message += SensorAddressToString(addressesFound[i]);
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 189 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "189" "." "295" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "2_SENSOREN.ino" "." "189" "." "296" "\", \"aSM\", @progbits, 1 #"))) = (
 # 189 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino"
               "</option>"
 # 189 "c:\\Arduino\\git\\BrewDevice\\2_SENSOREN.ino" 3
@@ -927,7 +882,7 @@ void handlereqPins()
   {
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 147 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "147" "." "296" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "147" "." "297" "\", \"aSM\", @progbits, 1 #"))) = (
 # 147 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino"
               "<option>"
 # 147 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
@@ -937,7 +892,7 @@ void handlereqPins()
     message += PinToString(actors[id].pin_actor);
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 149 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "149" "." "297" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "149" "." "298" "\", \"aSM\", @progbits, 1 #"))) = (
 # 149 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino"
               "</option><option disabled>──────────</option>"
 # 149 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
@@ -951,7 +906,7 @@ void handlereqPins()
     {
       message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 155 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "155" "." "298" "\", \"aSM\", @progbits, 1 #"))) = (
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "155" "." "299" "\", \"aSM\", @progbits, 1 #"))) = (
 # 155 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino"
                 "<option>"
 # 155 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
@@ -961,7 +916,7 @@ void handlereqPins()
       message += pin_names[i];
       message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 157 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "157" "." "299" "\", \"aSM\", @progbits, 1 #"))) = (
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "157" "." "300" "\", \"aSM\", @progbits, 1 #"))) = (
 # 157 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino"
                 "</option>"
 # 157 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
@@ -973,7 +928,7 @@ void handlereqPins()
   }
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 161 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "161" "." "300" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "161" "." "301" "\", \"aSM\", @progbits, 1 #"))) = (
 # 161 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino"
             "<option>"
 # 161 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
@@ -983,7 +938,7 @@ void handlereqPins()
   message += "deaktivieren";
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 163 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "163" "." "301" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "3_AKTOREN.ino" "." "163" "." "302" "\", \"aSM\", @progbits, 1 #"))) = (
 # 163 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino"
             "</option>"
 # 163 "c:\\Arduino\\git\\BrewDevice\\3_AKTOREN.ino" 3
@@ -1523,12 +1478,13 @@ void handleRoot()
 {
   server.sendHeader("Location", "/index.html", true); //Redirect to our html web page
   server.send(302, "text/plain", "");
+  // server.sendHeader(PSTR("Content-Encoding"), "gzip");
+  // server.send(200, "text/html", index_htm_gz, sizeof(index_htm_gz));
 }
 
 void handleWebRequests()
 {
-  // Serial.print("Web req not found: ");
-  if (loadFromLittleFS(server.uri()))
+  if (loadFromLittlefs(server.uri()))
   {
     return;
   }
@@ -1545,10 +1501,9 @@ void handleWebRequests()
     message += " NAME:" + server.argName(i) + "\n VALUE:" + server.arg(i) + "\n";
   }
   server.send(404, "text/plain", message);
-  // Serial.println(message);
 }
 
-bool loadFromLittleFS(String path)
+bool loadFromLittlefs(String path)
 {
   String dataType = "text/plain";
   if (path.endsWith("/"))
@@ -2251,7 +2206,7 @@ void handleRequestMSInd()
     {
       message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 731 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "731" "." "302" "\", \"aSM\", @progbits, 1 #"))) = (
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "731" "." "303" "\", \"aSM\", @progbits, 1 #"))) = (
 # 731 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
                 "<option>"
 # 731 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2261,7 +2216,7 @@ void handleRequestMSInd()
       message += PinToString(pinswitched);
       message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 733 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "733" "." "303" "\", \"aSM\", @progbits, 1 #"))) = (
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "733" "." "304" "\", \"aSM\", @progbits, 1 #"))) = (
 # 733 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
                 "</option><option disabled>──────────</option>"
 # 733 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2276,7 +2231,7 @@ void handleRequestMSInd()
       {
         message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 740 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "740" "." "304" "\", \"aSM\", @progbits, 1 #"))) = (
+                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "740" "." "305" "\", \"aSM\", @progbits, 1 #"))) = (
 # 740 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
                   "<option>"
 # 740 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2286,7 +2241,7 @@ void handleRequestMSInd()
         message += pin_names[i];
         message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 742 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "742" "." "305" "\", \"aSM\", @progbits, 1 #"))) = (
+                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "742" "." "306" "\", \"aSM\", @progbits, 1 #"))) = (
 # 742 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
                   "</option>"
 # 742 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2739,7 +2694,7 @@ void handleRequestStepsCount()
   {
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1187 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1187" "." "306" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1187" "." "307" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1187 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
               "<option>"
 # 1187 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2749,7 +2704,7 @@ void handleRequestStepsCount()
     message += i+1;
     message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1189 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1189" "." "307" "\", \"aSM\", @progbits, 1 #"))) = (
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1189" "." "308" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1189 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
               "</option>"
 # 1189 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2767,7 +2722,7 @@ void handleRequestActorNames()
   String message;
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1199 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1199" "." "308" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1199" "." "309" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1199 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "<option>"
 # 1199 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2777,7 +2732,7 @@ void handleRequestActorNames()
   message += msName;
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1201 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1201" "." "309" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1201" "." "310" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1201 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "</option>"
 # 1201 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2786,7 +2741,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1202 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1202" "." "310" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1202" "." "311" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1202 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "<option>"
 # 1202 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2796,7 +2751,7 @@ void handleRequestActorNames()
   message += ngName;
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1204 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1204" "." "311" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1204" "." "312" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1204 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "</option>"
 # 1204 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2805,7 +2760,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1205 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1205" "." "312" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1205" "." "313" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1205 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "<option>"
 # 1205 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2815,7 +2770,7 @@ void handleRequestActorNames()
   message += miNameAgitator;
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1207 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1207" "." "313" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1207" "." "314" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1207 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "</option>"
 # 1207 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2824,7 +2779,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1208 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1208" "." "314" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1208" "." "315" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1208 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "<option>"
 # 1208 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2834,7 +2789,7 @@ void handleRequestActorNames()
   message += miNamePump;
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1210 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1210" "." "315" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1210" "." "316" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1210 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "</option>"
 # 1210 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2843,7 +2798,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1211 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1211" "." "316" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1211" "." "317" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1211 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "<option>"
 # 1211 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2853,7 +2808,7 @@ void handleRequestActorNames()
   message += miNameRHE;
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1213 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1213" "." "317" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1213" "." "318" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1213 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "</option>"
 # 1213 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2862,7 +2817,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1214 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1214" "." "318" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1214" "." "319" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1214 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "<option>"
 # 1214 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2871,7 +2826,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1215 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1215" "." "319" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1215" "." "320" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1215 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "no_actor"
 # 1215 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -2880,7 +2835,7 @@ void handleRequestActorNames()
             )));
   message += ((reinterpret_cast<const __FlashStringHelper *>(
 # 1216 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
-            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1216" "." "320" "\", \"aSM\", @progbits, 1 #"))) = (
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "7_WEB.ino" "." "1216" "." "321" "\", \"aSM\", @progbits, 1 #"))) = (
 # 1216 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino"
             "</option>"
 # 1216 "c:\\Arduino\\git\\BrewDevice\\7_WEB.ino" 3
@@ -3356,359 +3311,6 @@ void tickerMaischeCallback() // Ticker helper function calling Event WLAN Error
     handleTasksStart();
 
   handleMaische();
-}
-# 1 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-void upIn()
-{
-    //    const uint8_t fingerprint[20] = {0xcc, 0xaa, 0x48, 0x48, 0x66, 0x46, 0x0e, 0x91, 0x53, 0x2c, 0x9c, 0x7c, 0x23, 0x2a, 0xb1, 0x74, 0x4d, 0x29, 0x9d, 0x33};
-    std::unique_ptr<BearSSL::WiFiClientSecure> clientup(new BearSSL::WiFiClientSecure);
-    //clientup->setFingerprint(fingerprint);
-    clientup->setInsecure();
-
-    HTTPClient https;
-
-    if (https.begin(*clientup, "https://guest:guest:x-oauth-basic@raw.githubusercontent.com/InnuendoPi/MQTTDevice2/master/data/index.html"))
-    {
-        int httpCode = https.GET();
-        if (httpCode > 0)
-        {
-            // HTTP header has been send and Server response header has been handled
-            // Serial.printf("*** SYSINFO: [HTTPS] GET index.html Antwort: %d\n", httpCode);
-
-            // file found at server
-            if (httpCode == HTTP_CODE_OK)
-            {
-
-                // get lenght of document (is -1 when Server sends no Content-Length header)
-                int len = https.getSize();
-
-                // create buffer for read
-                static uint8_t buff[128] = {0};
-
-                // Open file for write
-                fsUploadFile = LittleFS.open("/index.html", "w");
-                if (!fsUploadFile)
-                {
-                    //Serial.printf( F("file open failed"));
-                    Serial.println("Abbruch!");
-                    Serial.println("*** SYSINFO: Fehler beim Speichern index.html");
-                    https.end();
-                    return;
-                }
-
-                // read all data from server
-                while (https.connected() && (len > 0 || len == -1))
-                {
-                    // get available data size
-                    size_t size = clientup->available();
-                    //Serial.printf("*** SYSINFO: [HTTPS] index size avail: %d\n", size);
-
-                    if (size)
-                    {
-                        //read up to 128 byte
-                        int c = clientup->readBytes(buff, ((size > sizeof(buff)) ? sizeof(buff) : size));
-
-                        // write it to file
-                        fsUploadFile.write(buff, c);
-
-                        if (len > 0)
-                        {
-                            len -= c;
-                        }
-                    }
-                    delay(1);
-                }
-
-                Serial.println("*** SYSINFO: Index Update abgeschlossen.");
-                fsUploadFile.close();
-                LittleFS.remove("/update.txt");
-                fsUploadFile = LittleFS.open("/update2.txt", "w");
-                int bytesWritten = fsUploadFile.print("0");
-                fsUploadFile.close();
-            }
-            else
-                return;
-        }
-        else
-        {
-            Serial.println("Abbruch!");
-            Serial.printf("*** SYSINFO: Update index.html Fehler: %s\n", https.errorToString(httpCode).c_str());
-            https.end();
-            LittleFS.end(); // unmount LittleFS
-            ESP.restart();
-            return;
-        }
-        https.end();
-        return;
-    }
-    return;
-}
-
-void upCerts()
-{
-    //    const uint8_t fingerprint[20] = {0xcc, 0xaa, 0x48, 0x48, 0x66, 0x46, 0x0e, 0x91, 0x53, 0x2c, 0x9c, 0x7c, 0x23, 0x2a, 0xb1, 0x74, 0x4d, 0x29, 0x9d, 0x33};
-    std::unique_ptr<BearSSL::WiFiClientSecure> clientup(new BearSSL::WiFiClientSecure);
-    //clientup->setFingerprint(fingerprint);
-    clientup->setInsecure();
-    HTTPClient https;
-
-    if (https.begin(*clientup, "https://guest:guest:x-oauth-basic@raw.githubusercontent.com/InnuendoPi/MQTTDevice2/master/Info/ce.rts"))
-    {
-        int httpCode = https.GET();
-        if (httpCode > 0)
-        {
-            // Serial.printf("*** SYSINFO: [HTTPS] GET certs.ar Antwort: %d\n", httpCode);
-            if (httpCode == HTTP_CODE_OK)
-            {
-                int len = https.getSize();
-                static uint8_t buff[128] = {0};
-                fsUploadFile = LittleFS.open("/certs.ar", "w");
-                if (!fsUploadFile)
-                {
-                    Serial.println("Abbruch!");
-                    Serial.println("*** SYSINFO: Fehler beim Speichern certs.ar");
-                    https.end();
-                    return;
-                }
-
-                while (https.connected() && (len > 0 || len == -1))
-                {
-                    size_t size = clientup->available();
-                    if (size)
-                    {
-                        int c = clientup->readBytes(buff, ((size > sizeof(buff)) ? sizeof(buff) : size));
-                        fsUploadFile.write(buff, c);
-                        if (len > 0)
-                        {
-                            len -= c;
-                        }
-                    }
-                    delay(1);
-                }
-                fsUploadFile.close();
-                Serial.println("*** SYSINFO: Certs Update abgeschlossen.");
-                LittleFS.remove("/update2.txt");
-                fsUploadFile = LittleFS.open("/update3.txt", "w");
-                int bytesWritten = fsUploadFile.print("0");
-                fsUploadFile.close();
-            }
-            else
-                return;
-        }
-        else
-        {
-            Serial.println("Abbruch!");
-            Serial.printf("*** SYSINFO: Update certs Fehler: %s\n", https.errorToString(httpCode).c_str());
-            https.end();
-            LittleFS.end(); // unmount LittleFS
-            ESP.restart();
-            return;
-        }
-        https.end();
-        return;
-    }
-    return;
-}
-
-void upFirm()
-{
-    BearSSL::CertStore certStore;
-    int numCerts = certStore.initCertStore(LittleFS, 
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                                                    (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "991_HTTPUpdate.ino" "." "156" "." "321" "\", \"aSM\", @progbits, 1 #"))) = (
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                                                    "/certs.idx"
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                                                    ); &__pstr__[0];}))
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                                                                      , 
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                                                                        (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "991_HTTPUpdate.ino" "." "156" "." "322" "\", \"aSM\", @progbits, 1 #"))) = (
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                                                                        "/certs.ar"
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                                                                        ); &__pstr__[0];}))
-# 156 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                                                                                         );
-    Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 157 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "991_HTTPUpdate.ino" "." "157" "." "323" "\", \"aSM\", @progbits, 1 #"))) = (
-# 157 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                "Number of CA certs read: "
-# 157 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                ); &__pstr__[0];}))
-# 157 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                ))));
-    Serial.println(numCerts);
-    if (numCerts == 0)
-    {
-        Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
-# 161 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                      (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "991_HTTPUpdate.ino" "." "161" "." "324" "\", \"aSM\", @progbits, 1 #"))) = (
-# 161 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                      "*** SYSINFO: No certs found. Did you run certs-from-mozill.py and upload the LittleFS directory before running?"
-# 161 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino" 3
-                      ); &__pstr__[0];}))
-# 161 "c:\\Arduino\\git\\BrewDevice\\991_HTTPUpdate.ino"
-                      ))));
-        return; // Can't connect to anything w/o certs!
-    }
-
-    BearSSL::WiFiClientSecure clientFirm;
-    clientFirm.setCertStore(&certStore);
-    clientFirm.setInsecure();
-
-    ESPhttpUpdate.onStart(update_started);
-    ESPhttpUpdate.onEnd(update_finished);
-    //ESPhttpUpdate.onProgress(update_progress);
-    ESPhttpUpdate.onError(update_error);
-
-    t_httpUpdate_return ret = ESPhttpUpdate.update(clientFirm, "https://raw.githubusercontent.com/InnuendoPi/MQTTDevice2/master/build/MQTTDevice2.ino.bin");
-
-    switch (ret)
-    {
-    case HTTP_UPDATE_FAILED:
-        Serial.printf("*** SYSINFO: HTTP_UPDATE_FAILED Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
-        break;
-
-    case HTTP_UPDATE_NO_UPDATES:
-        Serial.println("*** SYSINFO: HTTP_UPDATE_NO_UPDATES");
-        break;
-
-    case HTTP_UPDATE_OK:
-        Serial.println("*** SYSINFO: HTTP_UPDATE_OK");
-        break;
-    }
-    return;
-}
-
-//   // Stack dump
-//   // https://github.com/esp8266/Arduino/blob/master/doc/Troubleshooting/stack_dump.md
-
-void updateSys()
-{
-    if (LittleFS.exists("/update.txt"))
-    {
-        fsUploadFile = LittleFS.open("/update.txt", "r");
-        String line;
-        while (fsUploadFile.available())
-        {
-            line = char(fsUploadFile.read());
-        }
-        fsUploadFile.close();
-        int i = line.toInt();
-        if (i > 3)
-        {
-            LittleFS.remove("/update.txt");
-            Serial.println("*** SYSINFO: ERROR Index Update");
-            return;
-        }
-        fsUploadFile = LittleFS.open("/update.txt", "w");
-        i++;
-        int bytesWritten = fsUploadFile.print(i);
-        fsUploadFile.close();
-        fsUploadFile = LittleFS.open("/log1.txt", "w");
-        bytesWritten = fsUploadFile.print((i));
-        fsUploadFile.close();
-        Serial.print("*** SYSINFO Starte Index Update Free Heap: ");
-        Serial.println(ESP.getFreeHeap());
-        upIn();
-    }
-    if (LittleFS.exists("/update2.txt"))
-    {
-        fsUploadFile = LittleFS.open("/update2.txt", "r");
-        String line;
-        while (fsUploadFile.available())
-        {
-            line = char(fsUploadFile.read());
-        }
-        fsUploadFile.close();
-        int i = line.toInt();
-        if (i > 3)
-        {
-            LittleFS.remove("/update2.txt");
-            Serial.println("*** SYSINFO: ERROR Cert Update");
-            return;
-        }
-        fsUploadFile = LittleFS.open("/update2.txt", "w");
-        i++;
-        int bytesWritten = fsUploadFile.print(i);
-        fsUploadFile.close();
-        fsUploadFile = LittleFS.open("/log2.txt", "w");
-        bytesWritten = fsUploadFile.print((i));
-        fsUploadFile.close();
-        Serial.print("*** SYSINFO Starte Cert Update Free Heap: ");
-        Serial.println(ESP.getFreeHeap());
-        upCerts();
-    }
-    if (LittleFS.exists("/update3.txt"))
-    {
-        fsUploadFile = LittleFS.open("/update3.txt", "r");
-        String line;
-        while (fsUploadFile.available())
-        {
-            line = char(fsUploadFile.read());
-        }
-        fsUploadFile.close();
-        int i = line.toInt();
-        if (i > 3)
-        {
-            LittleFS.remove("/update3.txt");
-            Serial.println("*** SYSINFO: ERROR Firmware Update");
-            return;
-        }
-        fsUploadFile = LittleFS.open("/update3.txt", "w");
-        i++;
-        int bytesWritten = fsUploadFile.print(i);
-        fsUploadFile.close();
-        fsUploadFile = LittleFS.open("/log3.txt", "w");
-        bytesWritten = fsUploadFile.print((i));
-        fsUploadFile.close();
-
-        Serial.print("*** SYSINFO Starte Firmware Update Free Heap: ");
-        Serial.println(ESP.getFreeHeap());
-        upFirm();
-    }
-}
-
-void startHTTPUpdate()
-{
-    // Starte Updates
-    fsUploadFile = LittleFS.open("/update.txt", "w");
-    if (!fsUploadFile)
-    {
-        ;
-        return;
-    }
-    else
-    {
-        int bytesWritten = fsUploadFile.print("0");
-        fsUploadFile.close();
-    }
-    rebootDevice();
-}
-
-void update_progress(int cur, int total)
-{
-    Serial.printf("*** SYSINFO:  Firmware Update %d von %d Bytes\n", cur, total);
-}
-
-void update_started()
-{
-    Serial.println("*** SYSINFO:  Firmware Update gestartet");
-}
-
-void update_finished()
-{
-    Serial.println("*** SYSINFO:  Firmware Update beendet");
-    LittleFS.remove("/update3.txt");
-}
-
-void update_error(int err)
-{
-    Serial.printf("*** SYSINFO:  Firmware Update Fehler error code %d\n", err);
-    LittleFS.end(); // unmount LittleFS
-    ESP.restart();
 }
 # 1 "c:\\Arduino\\git\\BrewDevice\\992_MaischePlan.ino"
 void readMaischePlan()
@@ -5422,58 +5024,260 @@ void checkForTask(String value)
 
 */
 # 1 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+void replyToCLient(int msg_type = 0, const char *msg = "")
+{
+  server.sendHeader("Access-Control-Allow-Origin", "*");
+  switch (msg_type)
+  {
+  case OK:
+    server.send(200, (reinterpret_cast<const __FlashStringHelper *>("text/plain")), "");
+    break;
+  case CUSTOM:
+    server.send(200, (reinterpret_cast<const __FlashStringHelper *>("text/plain")), msg);
+    break;
+  case NOT_FOUND:
+    server.send(404, (reinterpret_cast<const __FlashStringHelper *>("text/plain")), msg);
+    break;
+  case BAD_REQUEST:
+    server.send(400, (reinterpret_cast<const __FlashStringHelper *>("text/plain")), msg);
+    break;
+  case ERROR:
+    server.send(500, (reinterpret_cast<const __FlashStringHelper *>("text/plain")), msg);
+    break;
+  }
+}
+
+void replyOK()
+{
+  replyToCLient(OK, "");
+}
+
+void handleGetEdit()
+{
+  server.sendHeader(
+# 31 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                   (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "31" "." "322" "\", \"aSM\", @progbits, 1 #"))) = (
+# 31 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                   "Content-Encoding"
+# 31 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                   ); &__pstr__[0];}))
+# 31 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                           , "gzip");
+  server.send_P(200, "text/html", edit_htm_gz, sizeof(edit_htm_gz));
+}
+
+void handleStatus()
+{
+  FSInfo fs_info;
+  LittleFS.info(fs_info);
+  String json;
+  json.reserve(128);
+  json = "{\"type\":\"Filesystem\", \"isOk\":";
+  json += 
+# 42 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+         (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "42" "." "323" "\", \"aSM\", @progbits, 1 #"))) = (
+# 42 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+         "\"true\", \"totalBytes\":\""
+# 42 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+         ); &__pstr__[0];}))
+# 42 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                            ;
+  json += fs_info.totalBytes;
+  json += 
+# 44 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+         (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "44" "." "324" "\", \"aSM\", @progbits, 1 #"))) = (
+# 44 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+         "\", \"usedBytes\":\""
+# 44 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+         ); &__pstr__[0];}))
+# 44 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                     ;
+  json += fs_info.usedBytes;
+  json += "\"";
+  json += 
+# 47 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+         (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "47" "." "325" "\", \"aSM\", @progbits, 1 #"))) = (
+# 47 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+         ",\"unsupportedFiles\":\"\"}"
+# 47 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+         ); &__pstr__[0];}))
+# 47 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                            ;
+  server.send(200, "application/json", json);
+}
+
+void handleFileList()
+{
+  if (!server.hasArg("dir"))
+  {
+    server.send(500, "text/plain", "BAD ARGS");
+    return;
+  }
+  String path = server.arg("dir");
+  Dir dir = LittleFS.openDir(path);
+  path = String();
+
+  String output = "[";
+  while (dir.next())
+  {
+    File entry = dir.openFile("r");
+    if (output != "[")
+    {
+      output += ',';
+    }
+    bool isDir = false;
+    output += "{\"type\":\"";
+    output += (isDir) ? "dir" : "file";
+    output += "\",\"size\":\"";
+    output += entry.size();
+    output += "\",\"name\":\"";
+    output += String(entry.name()).substring(0);
+    output += "\"}";
+    entry.close();
+  }
+  output += "]";
+  server.send(200, "text/json", output);
+}
+
+void checkForUnsupportedPath(String &filename, String &error)
+{
+  if (!filename.startsWith("/"))
+  {
+    error += 
+# 88 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "88" "." "326" "\", \"aSM\", @progbits, 1 #"))) = (
+# 88 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+            " !! NO_LEADING_SLASH !! "
+# 88 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+            ); &__pstr__[0];}))
+# 88 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                            ;
+  }
+  if (filename.indexOf("//") != -1)
+  {
+    error += 
+# 92 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "92" "." "327" "\", \"aSM\", @progbits, 1 #"))) = (
+# 92 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+            " !! DOUBLE_SLASH !! "
+# 92 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+            ); &__pstr__[0];}))
+# 92 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                        ;
+  }
+  if (filename.endsWith("/"))
+  {
+    error += 
+# 96 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "96" "." "328" "\", \"aSM\", @progbits, 1 #"))) = (
+# 96 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+            " ! TRAILING_SLASH ! "
+# 96 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+            ); &__pstr__[0];}))
+# 96 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                        ;
+  }
+}
+
 // format bytes
-String formatBytes(size_t bytes) {
-  if (bytes < 1024) {
+String formatBytes(size_t bytes)
+{
+  if (bytes < 1024)
+  {
     return String(bytes) + "B";
-  } else if (bytes < (1024 * 1024)) {
+  }
+  else if (bytes < (1024 * 1024))
+  {
     return String(bytes / 1024.0) + "KB";
-  } else if (bytes < (1024 * 1024 * 1024)) {
+  }
+  else if (bytes < (1024 * 1024 * 1024))
+  {
     return String(bytes / 1024.0 / 1024.0) + "MB";
-  } else {
+  }
+  else
+  {
     return String(bytes / 1024.0 / 1024.0 / 1024.0) + "GB";
   }
 }
 
-String getContentType(String filename) {
-  if (server.hasArg("download")) {
+String getContentType(String filename)
+{
+  if (server.hasArg("download"))
+  {
     return "application/octet-stream";
-  } else if (filename.endsWith(".html")) {
+  }
+  else if (filename.endsWith(".htm"))
+  {
     return "text/html";
-  } else if (filename.endsWith(".htm")) {
+  }
+  else if (filename.endsWith(".html"))
+  {
     return "text/html";
-  } else if (filename.endsWith(".css")) {
+  }
+  else if (filename.endsWith(".css"))
+  {
     return "text/css";
-  } else if (filename.endsWith(".js")) {
+  }
+  else if (filename.endsWith(".sass"))
+  {
+    return "text/css";
+  }
+  else if (filename.endsWith(".js"))
+  {
     return "application/javascript";
-  } else if (filename.endsWith(".png")) {
+  }
+  else if (filename.endsWith(".png"))
+  {
+    return "image/svg+xml";
+  }
+  else if (filename.endsWith(".svg"))
+  {
     return "image/png";
-  } else if (filename.endsWith(".gif")) {
+  }
+  else if (filename.endsWith(".gif"))
+  {
     return "image/gif";
-  } else if (filename.endsWith(".jpg")) {
+  }
+  else if (filename.endsWith(".jpg"))
+  {
     return "image/jpeg";
-  } else if (filename.endsWith(".ico")) {
+  }
+  else if (filename.endsWith(".ico"))
+  {
     return "image/x-icon";
-  } else if (filename.endsWith(".xml")) {
+  }
+  else if (filename.endsWith(".xml"))
+  {
     return "text/xml";
-  } else if (filename.endsWith(".pdf")) {
+  }
+  else if (filename.endsWith(".pdf"))
+  {
     return "application/x-pdf";
-  } else if (filename.endsWith(".zip")) {
+  }
+  else if (filename.endsWith(".zip"))
+  {
     return "application/x-zip";
-  } else if (filename.endsWith(".gz")) {
+  }
+  else if (filename.endsWith(".gz"))
+  {
     return "application/x-gzip";
   }
   return "text/plain";
 }
+
 // Datei editieren -> speichern CTRL+S
-bool handleFileRead(String path) {
-  if (path.endsWith("/")) {
+bool handleFileRead(String path)
+{
+  if (path.endsWith("/"))
+  {
     path += "index.html";
   }
   String contentType = getContentType(path);
   String pathWithGz = path + ".gz";
-  if (LittleFS.exists(pathWithGz) || LittleFS.exists(path)) {
-    if (LittleFS.exists(pathWithGz)) {
+  if (LittleFS.exists(pathWithGz) || LittleFS.exists(path))
+  {
+    if (LittleFS.exists(pathWithGz))
+    {
       path += ".gz";
     }
     File file = LittleFS.open(path, "r");
@@ -5484,26 +5288,65 @@ bool handleFileRead(String path) {
   return false;
 }
 
-void handleFileUpload() {
-  if (server.uri() != "/edit") {
+void handleFileUpload()
+{
+  if (server.uri() != "/edit")
+  {
     return;
   }
-  HTTPUpload& upload = server.upload();
-  if (upload.status == UPLOAD_FILE_START) {
+  HTTPUpload &upload = server.upload();
+  if (upload.status == UPLOAD_FILE_START)
+  {
     String filename = upload.filename;
-    if (!filename.startsWith("/")) {
+    String result;
+    // Make sure paths always start with "/"
+    if (!filename.startsWith("/"))
+    {
       filename = "/" + filename;
+    }
+    checkForUnsupportedPath(filename, result);
+    if (result.length() > 0)
+    {
+      replyToCLient(ERROR, 
+# 228 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                          (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "228" "." "329" "\", \"aSM\", @progbits, 1 #"))) = (
+# 228 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                          "INVALID FILENAME"
+# 228 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                          ); &__pstr__[0];}))
+# 228 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                                  );
+      return;
     }
     ;
     fsUploadFile = LittleFS.open(filename, "w");
+    if (!fsUploadFile)
+    {
+      replyToCLient(ERROR, 
+# 235 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                          (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "235" "." "330" "\", \"aSM\", @progbits, 1 #"))) = (
+# 235 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                          "CREATE FAILED"
+# 235 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                          ); &__pstr__[0];}))
+# 235 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                               );
+      return;
+    }
     filename = String();
-  } else if (upload.status == UPLOAD_FILE_WRITE) {
+  }
+  else if (upload.status == UPLOAD_FILE_WRITE)
+  {
     ;
-    if (fsUploadFile) {
+    if (fsUploadFile)
+    {
       fsUploadFile.write(upload.buf, upload.currentSize);
     }
-  } else if (upload.status == UPLOAD_FILE_END) {
-    if (fsUploadFile) {
+  }
+  else if (upload.status == UPLOAD_FILE_END)
+  {
+    if (fsUploadFile)
+    {
       fsUploadFile.close();
     }
     ;
@@ -5511,69 +5354,207 @@ void handleFileUpload() {
   }
 }
 
-void handleFileDelete() {
-  if (server.args() == 0) {
+/*
+
+    Handle a file deletion request
+
+    Operation      | req.responseText
+
+    ---------------+--------------------------------------------------------------
+
+    Delete file    | parent of deleted file, or remaining ancestor
+
+    Delete folder  | parent of deleted folder, or remaining ancestor
+
+*/
+# 267 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+void handleFileDelete()
+{
+  if (server.args() == 0)
+  {
     return server.send(500, "text/plain", "BAD ARGS");
   }
   String path = server.arg(0);
-  ;
-  if (path == "/") {
-    return server.send(500, "text/plain", "BAD PATH");
-  }
-  if (!LittleFS.exists(path)) {
-    return server.send(404, "text/plain", "FileNotFound");
-  }
-  LittleFS.remove(path);
-  server.send(200, "text/plain", "");
-  path = String();
-}
-
-void handleFileCreate() {
-  if (server.args() == 0) {
-    return server.send(500, "text/plain", "BAD ARGS");
-  }
-  String path = server.arg(0);
-  ;
-  if (path == "/") {
-    return server.send(500, "text/plain", "BAD PATH");
-  }
-  if (LittleFS.exists(path)) {
-    return server.send(500, "text/plain", "FILE EXISTS");
-  }
-  File file = LittleFS.open(path, "w");
-  if (file) {
-    file.close();
-  } else {
-    return server.send(500, "text/plain", "CREATE FAILED");
-  }
-  server.send(200, "text/plain", "");
-  path = String();
-}
-
-void handleFileList() {
-  if (!server.hasArg("dir")) {
-    server.send(500, "text/plain", "BAD ARGS");
+  if (!LittleFS.exists(path))
+  {
+    replyToCLient(NOT_FOUND, 
+# 276 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "276" "." "331" "\", \"aSM\", @progbits, 1 #"))) = (
+# 276 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                            "FileNotFound"
+# 276 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                            ); &__pstr__[0];}))
+# 276 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                                );
     return;
   }
-  String path = server.arg("dir");
-  Dir dir = LittleFS.openDir(path);
-  path = String();
-
-  String output = "[";
-  while (dir.next()) {
-    File entry = dir.openFile("r");
-    if (output != "[") {
-      output += ',';
-    }
-    bool isDir = false;
-    output += "{\"type\":\"";
-    output += (isDir) ? "dir" : "file";
-    output += "\",\"name\":\"";
-    // output += String(entry.name()).substring(1);
-    output += String(entry.name()).substring(0); // Änderung für LittleFS
-    output += "\"}";
-    entry.close();
+  //deleteRecursive(path);
+  File root = LittleFS.open(path, "r");
+  // If it's a plain file, delete it
+  if (!root.isDirectory())
+  {
+    root.close();
+    LittleFS.remove(path);
+    replyOK();
   }
-  output += "]";
-  server.send(200, "text/json", output);
+  else
+  {
+    LittleFS.rmdir(path);
+    replyOK();
+  }
+}
+
+/*
+
+    Handle the creation/rename of a new file
+
+    Operation      | req.responseText
+
+    ---------------+--------------------------------------------------------------
+
+    Create file    | parent of created file
+
+    Create folder  | parent of created folder
+
+    Rename file    | parent of source file
+
+    Move file      | parent of source file, or remaining ancestor
+
+    Rename folder  | parent of source folder
+
+    Move folder    | parent of source folder, or remaining ancestor
+
+*/
+# 307 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+void handleFileCreate()
+{
+  String path = server.arg("path");
+  if (path.isEmpty())
+  {
+    replyToCLient(BAD_REQUEST, 
+# 312 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "312" "." "332" "\", \"aSM\", @progbits, 1 #"))) = (
+# 312 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                              "PATH ARG MISSING"
+# 312 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                              ); &__pstr__[0];}))
+# 312 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                                      );
+    return;
+  }
+  if (path == "/")
+  {
+    replyToCLient(BAD_REQUEST, 
+# 317 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "317" "." "333" "\", \"aSM\", @progbits, 1 #"))) = (
+# 317 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                              "BAD PATH"
+# 317 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                              ); &__pstr__[0];}))
+# 317 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                              );
+    return;
+  }
+
+  String src = server.arg("src");
+  if (src.isEmpty())
+  {
+    // No source specified: creation
+    if (path.endsWith("/"))
+    {
+      // Create a folder
+      path.remove(path.length() - 1);
+      if (!LittleFS.mkdir(path))
+      {
+        replyToCLient(ERROR, 
+# 331 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "331" "." "334" "\", \"aSM\", @progbits, 1 #"))) = (
+# 331 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                            "MKDIR FAILED"
+# 331 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                            ); &__pstr__[0];}))
+# 331 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                                );
+        return;
+      }
+    }
+    else
+    {
+      // Create a file
+      File file = LittleFS.open(path, "w");
+      if (file)
+      {
+        file.write(0);
+        file.close();
+      }
+      else
+      {
+        replyToCLient(ERROR, 
+# 346 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                            (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "346" "." "335" "\", \"aSM\", @progbits, 1 #"))) = (
+# 346 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                            "CREATE FAILED"
+# 346 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                            ); &__pstr__[0];}))
+# 346 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                                 );
+        return;
+      }
+    }
+    replyToCLient(CUSTOM, path.c_str());
+  }
+  else
+  {
+    // Source specified: rename
+    if (src == "/")
+    {
+      replyToCLient(BAD_REQUEST, 
+# 357 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "357" "." "336" "\", \"aSM\", @progbits, 1 #"))) = (
+# 357 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                "BAD SRC"
+# 357 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                                ); &__pstr__[0];}))
+# 357 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                               );
+      return;
+    }
+
+    if (!LittleFS.exists(src))
+    {
+      replyToCLient(BAD_REQUEST, 
+# 363 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "363" "." "337" "\", \"aSM\", @progbits, 1 #"))) = (
+# 363 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                "BSRC FILE NOT FOUND"
+# 363 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                                ); &__pstr__[0];}))
+# 363 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                                           );
+      return;
+    }
+
+    if (path.endsWith("/"))
+    {
+      path.remove(path.length() - 1);
+    }
+    if (src.endsWith("/"))
+    {
+      src.remove(src.length() - 1);
+    }
+    if (!LittleFS.rename(src, path))
+    {
+      replyToCLient(ERROR, 
+# 377 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                          (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "FSBrowser.ino" "." "377" "." "338" "\", \"aSM\", @progbits, 1 #"))) = (
+# 377 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                          "RENAME FAILED"
+# 377 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino" 3
+                          ); &__pstr__[0];}))
+# 377 "c:\\Arduino\\git\\BrewDevice\\FSBrowser.ino"
+                                               );
+      return;
+    }
+    replyOK();
+  }
 }
